@@ -3,14 +3,17 @@
 <script type="text/javascript">
 function fun(){
 
-if (confirm("Хотите стать Web-дизайнером?")) {
-2
-  alert("Учите стили CSS и JavaScript!")
-3
+if (confirm("Хотите посчитать")) {
+  y=9;
+  x=5;
+  //alert(' '+((35*y-25*x)/5+232) );
+  //alert('e '+ '1 ' );
+  alert(2 + '1 ' );
+ // alert(2 + 1);
 } else {
-4
+
   alert("Упускаете время")
-5
+
 }
 
 }
