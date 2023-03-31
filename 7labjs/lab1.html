@@ -1,0 +1,30 @@
+﻿<html>
+<head>
+<script type='text/javascript'>
+// Функция выводит текст на страницу
+function messageWrite() {
+   document.write('Текст выводится на страницу с помощью JavaScript!');
+}
+function messageWrite2() {
+
+   a= prompt('Введите число a');
+   b= prompt('Введите число b');
+   aa=+a;
+   bb=+b;
+   document.write('Результат сложение чисел'+(aa+bb)); 
+   document.write('<br>');
+   document.write('Результат сложение строк '+a+b); 
+   document.write('<br>');
+   document.write('Результат сложение строки и числа'+a+bb);
+   document.write('<br>');
+   document.write('Результат сложение числа и строки'+aa+b); 
+   document.write('<br>');   
+   
+}
+</script>
+</head>
+<body>
+<input type='button' value='Задание 1' onclick='messageWrite()' />
+<input type='button' value='Задание 2' onclick='messageWrite2()' />
+</body>
+</html>
