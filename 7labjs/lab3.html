@@ -1,0 +1,24 @@
+﻿<html>
+<head>
+<script type='text/javascript'>
+// Функция выводит текст на страницу
+function messageWrite() {
+   document.write('Текст выводится на страницу с помощью JavaScript!');
+}
+function messageWrite2() {
+   a = new Array();
+   a[0]=6*Math.PI*Math.PI+3*Math.E^8 ;
+   a[1]=2*Math.cos(4)+Math.cos(12) + 8 * Math.E^3;
+   a[2]=3*Math.sin(9)+Math.log(5)+Math.sqrt(3);
+   a[3]=2*Math.tan(5)+6*Math.PI+Math.sqrt(12);
+   for(i=0;i<=3;i+=1){
+    document.write(' ' +a[i]+'<br>');
+   }
+}
+</script>
+</head>
+<body>
+<input type='button' value='Задание 1' onclick='messageWrite()' />
+<input type='button' value='Задание 2' onclick='messageWrite2()' />
+</body>
+</html>
