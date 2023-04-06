@@ -15,6 +15,12 @@ class Gruppa {
 	//document.write('В группе ' + this.n + ' Специальность'+ this.spec 
 	//+ ' студентов '+this.kolich+'<br>');
   }
+  add_stud(k) {
+	this.kolich = this.kolich-k;
+  }
+  sub_stud(k) {
+	this.kolich = this.kolich-k;
+  }
 }
 
 
@@ -40,8 +46,8 @@ class Gruppas {
 
 let vuz = new Gruppas()
 vuz.newGruppa(1711, "ИСиТ", 28);
-vuz.newGruppa(1712, "ИСиТ", 20);
-vuz.newGruppa(1714, "ИСиТ", 21);
+vuz.newGruppa(1712, "ИСиТ", 20).sub_stud(5);
+vuz.newGruppa(1714, "ИСиТ", 21).add_stud(5);;
 vuz.newGruppa(1714, "ИСиТ", 23);
 vuz.newGruppa(1715, "ИСиТ", 28);
 
