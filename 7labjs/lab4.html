@@ -25,7 +25,7 @@ class Gruppas {
     this.gruppas = []
   }
   
-  newGruppa(name){
+  newGruppa(n,spec,kolich){
     let p = new Gruppa(n,spec,kolich)
     this.gruppas.push(p)
     return p
@@ -52,7 +52,7 @@ console.log(vuz.allGruppas)
 
 
 // make them do something
-league.allGruppas.forEach(gruppa => gruppa.vivod())
+vuz.allGruppas.forEach(gruppa => gruppa.vivod())
 
 
 
