@@ -1,0 +1,45 @@
+﻿<html>
+<head>
+<script type='text/javascript'>
+
+function Gruppa(n,spec,kolich) {
+//Свойства(номер, специальность, количество)
+this.n=n;
+this.spec=spec;
+this.kolich=kolich;
+
+	this.add_stud=function add_stud(k) {
+				  this.kolich+=k;
+	document.write('Вгруппу ' + this.n + ' добавили'+ k + ' студентов.<br\>'); 
+	}
+}
+
+class Gruppa {
+  constructor(n, spec,kolich) {
+    this.n = n;
+    this.spec = spec;
+	this.kolich = kolich;
+  }
+}
+
+gr1=new Gruppa(2, 'ИСиТ', 28);
+
+gr1.add_stud(2);
+
+Gruppa.prototype.kurs=this.kurs
+gr1.kurs=2
+document.write(gr1.n,gr1.spec, gr1.kolich, gr1.kurs)
+
+</script>
+
+
+
+
+
+</script>
+</head>
+<body>
+<input type='button' value='Задание 1' onclick='messageWrite()' />
+<input type='button' value='Задание 2' onclick='messageWrite2()' />
+</body>
+</html>
