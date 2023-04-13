@@ -1,104 +1,87 @@
 ﻿<html>
-<head>
-<script type='text/javascript'>
-class Gruppa {
-  constructor(n, spec,kolich) {
-    this.n = n;
-    this.spec = spec;
-	this.kolich = kolich;
-  }
-  vivod(){
-   // console.log(this.name, "plays")
-   console.log('В группе ' + this.n + ' Специальность'+ this.spec 
-	+ ' студентов '+this.kolich+'<br>');
-	
-	//document.write('В группе ' + this.n + ' Специальность'+ this.spec 
-	//+ ' студентов '+this.kolich+'<br>');
-  }
-  add_stud(k) {
-	this.kolich = this.kolich-k;
-  }
-  sub_stud(k) {
-	this.kolich = this.kolich-k;
-  }
-}
+    <head>
+        <script type='text/javascript'>
+            class Gruppa 
+            {
+                constructor(n, spec, kolich) 
+                {
+                    this.n = n;
+                    this.spec = spec;
+                    this.kolich = kolich;
+                }
+                
+                vivod()
+                {
+                    console.log('В группе ' + this.n + ' Специальность' + this.spec + ' студентов ' + this.kolich + '<br />');
+                }
 
+                add_stud(k)
+                {
+                    this.kolich = this.kolich - k;
+                }
 
+                sub_stud(k) 
+                {
+                    this.kolich = this.kolich - k;
+                }
+            }
 
+            class Gruppas 
+            {
+                constructor()
+                {
+                    this.gruppas = [];
+                }
 
-class Gruppas {
-  constructor(){
-    this.gruppas = []
-  }
-  
-  newGruppa(n,spec,kolich){
-    let p = new Gruppa(n,spec,kolich)
-    this.gruppas.push(p)
-    return p
-  }
-  get allGruppas(){
-    return this.gruppas
-  }
-  get numberOfGruppas(){
-      return this.gruppas.length
-  }
-  //function AvgGruppas(){
-  //  o=this.gruppas;
-  //  for (var key in o) {
- //   console.log(o[key].n+'<br>');
-//	}
- //   return 0;
- // }
-}
+                newGruppa(n,spec,kolich)
+                {
+                    let p = new Gruppa(n,spec,kolich);
+                    this.gruppas.push(p);
+                    return p;
+                }
+                get allGruppas()
+                {
+                    return this.gruppas;
+                }
+                get numberOfGruppas()
+                {
+                    return this.gruppas.length;
+                }
+            }
 
-let vuz = new Gruppas()
-vuz.newGruppa(1711, "ИСиТ", 28);
-vuz.newGruppa(1712, "ИСиТ", 20).sub_stud(5);
-vuz.newGruppa(1714, "ИСиТ", 21).add_stud(5);;
-vuz.newGruppa(1714, "ИСиТ", 23);
-vuz.newGruppa(1715, "ИСиТ", 28);
+            let vuz = new Gruppas();
 
+            vuz.newGruppa(1711, "ИСиТ", 28);
+            vuz.newGruppa(1712, "ИСиТ", 20).sub_stud(5);
+            vuz.newGruppa(1714, "ИСиТ", 21).add_stud(5);
+            vuz.newGruppa(1714, "ИСиТ", 23);
+            vuz.newGruppa(1715, "ИСиТ", 28);
 
-// list all the players
-console.log(vuz.numberOfGruppas + " Grupps")
-console.log(vuz.allGruppas)
+            console.log(vuz.numberOfGruppas + " Grupps");
+            console.log(vuz.allGruppas);
 
+            avg = 0;
+            o = vuz.allGruppas;
+            
+            for(var key in o) 
+            {
+                avg = avg + o[key].kolich;
+            }
 
-// make them do something
-//vuz.allGruppas.forEach(gruppa => gruppa.vivod())
+            console.log("Среднее количество студентов " + avg / vuz.numberOfGruppas + '<br />');
 
-//vuz.allGruppas.AvgGruppas();
-   avg=0;
-   
-   o=vuz.allGruppas;
-   for (var key in o) {
-    avg=avg+o[key].kolich;
-   }
-   
-   console.log("Среднее количество студентов "+avg/vuz.numberOfGruppas+'<br>');
+            const getVariableType = a => a.constructor.name;
+            console.log("Объект " + getVariableType(vuz) + "<br />");
 
-   const getVariableType = a => a.constructor.name;
-   console.log("Объект "+getVariableType(vuz)+"<br>");
- 
-   ob=vuz;
-   //if (typeof object === 'gruppas') {
-   //    console.log("Группы вуза");
-   //} else {
-   //    console.log(typeof object);
-   //}
-     console.log(typeof ob);
-     console.log(typeof ob === 'object' ? "Группы вуза" : "Строка")
+            ob = vuz;
 
-</script>
+            console.log(typeof ob);
+            console.log(typeof ob === 'object' ? "Группы вуза" : "Строка");
 
-
-
-
-
-</script>
-</head>
-<body>
-<input type='button' value='Задание 1' onclick='messageWrite()' />
-<input type='button' value='Задание 2' onclick='messageWrite2()' />
-</body>
+        </script>
+    </head>
+    <body>
+        <input type='button' value='Задание 1' onclick='messageWrite()' />
+        <input type='button' value='Задание 2' onclick='messageWrite2()' />
+    </body>
 </html>
