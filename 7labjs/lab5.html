@@ -22,21 +22,12 @@
       }
 	  function go4() {
 		
-		//var sr = parseInt(document.getElementById('sr1').innerHTML)
-		//+parseInt(document.getElementById('sr2').innerHTML)
-		//+parseInt(document.getElementById('sr3').innerHTML);
-		//document.getElementById('sr').innerHTML = sr/3
-        
-		var o = document.getElementById('sr0')
-		document.write(o);
-		sr=0;
-		for(var key in o) 
-            {
-                sr=sr+parseInt(key.innerHTML)
-				alert(key.innerHTML);
-            }
-		alert(sr);
-      }
+		var sr = parseInt(document.getElementById('sr1').innerHTML)
+			+parseInt(document.getElementById('sr2').innerHTML)
+			+parseInt(document.getElementById('sr3').innerHTML);
+		document.getElementById('sr').innerHTML = sr/3
+     }   
+	
      </script>
   </head>
   <body>
@@ -60,12 +51,7 @@
 		  <tr>
 		  <td>Петров </td><td id='sr3'>19 </td>
 		 </tr>
-		   <tr>
-		  <td>Максимов </td><td id='sr0'>14 </td>
-		 </tr>
-		   <tr>
-		  <td>Андреев </td><td id='sr0'>12 </td>
-		 </tr>
+		 
 		 <tr>
 		   <td>Средний балл </td><td id='sr'> </td>
 		 </tr>
