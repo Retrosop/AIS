@@ -1,42 +1,57 @@
 ﻿<html>
   <head>
     <script>
-	function go1() {
-         alert(document.documentElement.nodeType)
-		 a=document.body.lastChild;
-         alert(a.nodeType);
-    }
-       function go2() {
-         for(var i=0; i<document.body.childNodes.length; i++) {
-			var child = document.body.childNodes[i]
-			alert(child.tagName+' '+child.nodeType) 
+		function go1() 
+		{
+			alert(document.documentElement.nodeType)
+			a=document.body.lastChild;
+			alert(a.nodeType);
 		}
-        
-      }
-	  function go3() {
-        var b = document.getElementsByTagName('b')[0]
-		b.innerHTML = 'Тест bold'
-		var b1 = document.getElementById('b1')
-		b1.innerHTML = 'Тест bold 4'
-        
-      }
-	  function go4() {
 		
-		//var sr = parseInt(document.getElementById('sr1').innerHTML)
-		//+parseInt(document.getElementById('sr2').innerHTML)
-		//+parseInt(document.getElementById('sr3').innerHTML);
-		//document.getElementById('sr').innerHTML = sr/3
-        
-		var o = document.getElementById('sr0')
-		document.write(o);
-		sr=0;
-		for(var key in o) 
-            {
-                sr=sr+parseInt(key.innerHTML)
-				alert(key.innerHTML);
-            }
-		alert(sr);
-      }
+		function go2() 
+		{
+			for(var i=0; i<document.body.childNodes.length; i++) 
+			{
+				var child = document.body.childNodes[i]
+				alert(child.tagName+' '+child.nodeType) 
+			}
+		}
+		
+		function go3() 
+		{
+			var b = document.getElementsByTagName('b')[0]
+			b.innerHTML = 'Тест bold'
+			var b1 = document.getElementById('b1')
+			b1.innerHTML = 'Тест bold 4'
+
+		}
+		
+		function go4() 
+		{
+			var avg_val = 0;
+			parseInt(avg_val);
+			var count = 0;
+			var table = document.getElementById('myTable');
+			var rowLength = table.rows.length;
+			for (i = 0; i < rowLength; i++)
+			{
+
+				var oCells = table.rows.item(i).cells;
+				var cellLength = oCells.length;
+				for(var j = 0; j < cellLength; j++)
+				{
+					j++;
+					var cellVal = oCells.item(j).innerHTML;
+					if(!isNaN(parseInt(cellVal))) 
+					{
+						avg_val = avg_val + parseInt(cellVal);
+						count++;
+					}
+				}
+			}
+			var b = document.getElementById('avg');
+			b.innerHTML = parseFloat(avg_val)/count;
+		}
      </script>
   </head>
   <body>
@@ -47,27 +62,27 @@
      <input type="button" onclick="go2()" value="Go1"/>  Go 2
 	 <input type="button" onclick="go3()" value="Go3"/>  Go 3 </br>
 	 
-	 <table border=1>
+	 <table id="myTable" border=1>
 		 <tr>
 			<td>Студент </td><td>Балл </td>
 		 </tr>
 		 <tr>
-		  <td>Иванов </td><td id='sr1'>10 </td>
+		  <td>Иванов </td><td>10 </td>
 		 </tr>
 		  <tr>
-		  <td>Сидоров </td><td id='sr2'>20 </td>
+		  <td>Сидоров </td><td>20 </td>
 		 </tr>
 		  <tr>
-		  <td>Петров </td><td id='sr3'>19 </td>
+		  <td>Петров </td><td>19 </td>
 		 </tr>
 		   <tr>
-		  <td>Максимов </td><td id='sr0'>14 </td>
+		  <td>Максимов </td><td>14 </td>
 		 </tr>
 		   <tr>
-		  <td>Андреев </td><td id='sr0'>12 </td>
+		  <td>Андреев </td><td>12 </td>
 		 </tr>
 		 <tr>
-		   <td>Средний балл </td><td id='sr'> </td>
+		   <td>Средний балл </td><td id="avg"> </td>
 		 </tr>
 	 </table>
 	 <input type="button" onclick="go4()" value="Go4"/>  Go 4
