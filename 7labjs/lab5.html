@@ -21,14 +21,21 @@
         
       }
 	  function go4() {
-		var sr = document.getElementById('sr')
-		sr.innerHTML = '5.78'
+		
+		//var sr = parseInt(document.getElementById('sr1').innerHTML)
+		//+parseInt(document.getElementById('sr2').innerHTML)
+		//+parseInt(document.getElementById('sr3').innerHTML);
+		//document.getElementById('sr').innerHTML = sr/3
         
-		var t = document.getElementsByTagName('table')[0]
-		var tr = document.getElementsByTagName('tr')
-		for (var key in tr) {
-          alert(tr.getElementsByTagName('td')[1])
-        }
+		var o = document.getElementById('sr0')
+		document.write(o);
+		sr=0;
+		for(var key in o) 
+            {
+                sr=sr+parseInt(key.innerHTML)
+				alert(key.innerHTML);
+            }
+		alert(sr);
       }
      </script>
   </head>
@@ -45,13 +52,19 @@
 			<td>Студент </td><td>Балл </td>
 		 </tr>
 		 <tr>
-		  <td>Иванов </td><td>10 </td>
+		  <td>Иванов </td><td id='sr1'>10 </td>
 		 </tr>
 		  <tr>
-		  <td>Сидоров </td><td>16 </td>
+		  <td>Сидоров </td><td id='sr2'>20 </td>
 		 </tr>
 		  <tr>
-		  <td>Петров </td><td>19 </td>
+		  <td>Петров </td><td id='sr3'>19 </td>
+		 </tr>
+		   <tr>
+		  <td>Максимов </td><td id='sr0'>14 </td>
+		 </tr>
+		   <tr>
+		  <td>Андреев </td><td id='sr0'>12 </td>
 		 </tr>
 		 <tr>
 		   <td>Средний балл </td><td id='sr'> </td>
