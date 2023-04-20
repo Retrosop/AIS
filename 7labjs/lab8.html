@@ -1,8 +1,14 @@
 ﻿<html>
   <head>
     <script>
+	
+	addEventListener("dblclick", (event) => {document.getElementById('d1').style.border="1px solid red"});
+      ondblclick = (event) => {};
+	  
+	  
 	function go1() {
-
+		//	document.getElementById('d1').innerHTML='123'.fontsize(25);
+		document.getElementById('d1').style.border="1px solid red"	;
 
     }
        
@@ -10,8 +16,13 @@
      </script>
   </head>
   <body>
-     
+       
 	 <br>
+	 
+	 <div id="d1" onclick="go1()">
+	   Примерный текст
+	 <div>
 	 <input type="button" onclick="go1()" value="Изменить"/>
   </body>
 </html>
+
