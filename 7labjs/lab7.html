@@ -1,0 +1,32 @@
+﻿<html>
+  <head>
+    <script>
+	function go1() {
+        document.write('Факультет информационных технологий');
+		document.write('Студент   '+document.getElementById('t2')+'   специальность  ИСиТ   курс  1   должен сдавать следующие  предметы:');
+		document.write('ОИТ');
+		document.write('История');
+
+    }
+       
+	
+     </script>
+  </head>
+  <body>
+     
+	 </table>
+	 <form>
+	     <textarea name="t1" placeholder="Тестовый факультет"></textarea> <br>
+		 
+	     <input type="text" name="t2" placeholder="Петров" id="t2"> Фамилия <br>
+		 
+		 Предметы: <input type="checkbox" name="d1" > АИС <br> <input type="checkbox" name="d2" > ИСИС <br>
+		 
+		 
+		 <input type="submit">
+		 <input type="reset">
+	 </form>
+	 <br>
+	 <input type="button" onclick="go1()" value="Напечатать"/>
+  </body>
+</html>
