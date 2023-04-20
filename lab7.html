@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <script>
+        function go1(status) {
+            el = document.getElementById('d1');
+            style = window.getComputedStyle(el, null).getPropertyValue('font-size');
+            fontSize = parseFloat(style);
+            el.style.fontSize = (status ? (fontSize - 1) : (fontSize + 1)) + 'px';
+        }
+    </script>
+</head>
+<body>
+    <div id="d1">
+        Привет
+    </div>
+    <input type="button" onclick="go1(true)" value="Увеличить">  <input type="button" onclick="go1(false)" value="Уменьшить">
+</body>
+</html>
