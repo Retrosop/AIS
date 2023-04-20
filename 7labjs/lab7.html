@@ -3,6 +3,7 @@
     <script>
 	function go1() {
         document.write('Факультет информационных технологий');
+		document.write('Студент   '+document.getElementById('myform').['t2']+'   специальность  ИСиТ   курс  1   должен сдавать следующие  предметы:');
 		document.write('Студент   '+document.getElementById('t2')+'   специальность  ИСиТ   курс  1   должен сдавать следующие  предметы:');
 		document.write('ОИТ');
 		document.write('История');
@@ -15,7 +16,7 @@
   <body>
      
 	 </table>
-	 <form>
+	 <form id="myform">
 	     <textarea name="t1" placeholder="Тестовый факультет"></textarea> <br>
 		 
 	     <input type="text" name="t2" placeholder="Петров" id="t2"> Фамилия <br>
