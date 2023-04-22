@@ -1,0 +1,62 @@
+﻿<!DOCTYPE html>
+<html>
+    <head>
+    <script type="text/javascript">
+        var thisLeft=0;
+        var thisTop=0;
+        var moveID=0;
+
+        var width = 1000;//window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth;
+        var height = 1000;//window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight;
+
+        //var width = window.innerWidth - myDiv.offsetWidth;
+        //var height = window.innerHeight - myDiv.offsetHeight;
+
+        var state = 1;
+
+        // Function to move the text
+        function moveText() 
+        {
+            var thisText= document.getElementById('myDiv');
+
+            if (state == 1)
+                thisLeft += 100; //how much the text moves right
+            else if (state == 2)
+                thisTop +=100; //how much the text moves down
+
+            else if (state == 3)
+            {
+                thisTop -= 100;
+                thisLeft -= 100;
+            }
+
+            if (state == 1 && thisLeft >= width )
+            {
+                state = 2;
+                document.getElementById("myDiv").style.color = "blue";
+                document.getElementById("myDiv").style.fontSize= "xx-Large";
+                document.getElementById('myDiv').innerHTML= "moveDown";
+            }
+            else if (state == 2 && (thisTop >= height)) 
+                state = 3;
+            else if (state == 3 && (thisLeft <= 0)) 
+                state = 0;
+
+            thisText.style.left=thisLeft +"px";
+            thisText.style.top=thisTop +"px";
+        }
+
+        // how long it will take the text move to complete
+        function doMove() 
+        {
+            moveID=setInterval(moveText, 500);
+        }
+
+    </script>
+    </head>
+    <body  onload= "doMove()" >
+        <div id="myDiv" width="50px" height="50px" style="position:absolute; border: 1px solid" >
+            <p>movingRight</p>
+        </div>
+    </body>
+</html>

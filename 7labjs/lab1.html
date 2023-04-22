@@ -1,0 +1,136 @@
+﻿<html>
+<head>
+<script type='text/javascript'>
+function messageWrite() {
+   alert("Вас приветствует учебный центр");
+
+let name = prompt("Введите имя");
+
+if (name != null && name != "") {
+  alert(`Добро пожаловать на наши курсы, ${name}!`);
+}
+
+let answer = confirm("Хотите стать Web-дизайнером?");
+
+if (answer) {
+  alert("Учите стили CSS и JavaScript!");
+} else {
+  alert("Упускаете время!");
+}
+}
+function messageWrite2() {
+
+   a= prompt('Введите число a');
+   b= prompt('Введите число b');
+   aa=+a;
+   bb=+b;
+   document.write('Результат сложение чисел'+(aa+bb)); 
+   document.write('<br>');
+   document.write('Результат сложение строк '+a+b); 
+   document.write('<br>');
+   document.write('Результат сложение строки и числа'+a+bb);
+   document.write('<br>');
+   document.write('Результат сложение числа и строки'+aa+b); 
+   document.write('<br>');   
+   
+}
+
+</script>
+<script type="text/javascript">
+   function messageWrite3() {
+
+    let x = 10;
+    let y = 10;
+
+    let expr1 = ((35 * y) - (25 * x)) / 5 + 232;
+    let expr2 = (8 * y / x + 5 * x / y - 43) * 6;
+    let result = expr1 % expr2;
+
+    document.getElementById("expr1").textContent = expr1;
+    document.getElementById("expr2").textContent = expr2;
+    document.getElementById("result").textContent = result;
+
+    window.alert(`Первое выражение: ${expr1}\nВторое выражение: ${expr2}\nОстаток от деления: ${result}`);
+  }
+    
+    function messageWrite4() {
+      const number = parseFloat(prompt('Введите любое число'));
+
+      if ((number > 20 || number < 40) && number !== 15 && number % 5 === 0) {
+        window.alert('Правильное значение');
+      } 
+      else {
+        window.alert('Не правильное значение');
+      }
+    }
+    function messageWrite5() {
+      let age = parseInt(prompt("Введите ваш возраст:"));
+
+      (age >= 18) ? document.write("Вы совершеннолетний") : document.write("Вы несовершеннолетний");
+    }
+    function messageWrite6(){
+      let date = new Date();
+      let dayOfWeek = date.getDay();
+
+      switch (dayOfWeek) {
+        case 0:
+          document.write("Сегодня воскресенье");
+        break;
+        case 1:
+          document.write("Сегодня понедельник");
+        break;
+        case 2:
+          document.write("Сегодня вторник");
+        break;
+        case 3:
+          document.write("Сегодня среда");
+        break;
+        case 4:
+          document.write("Сегодня четверг");
+        break;
+        case 5:
+          document.write("Сегодня пятница");
+        break;
+        case 6:
+          document.write("Сегодня суббота");
+        break;
+        default:
+          document.write("Не удалось определить день недели");
+        break;
+      }
+    }
+    function messageWrite7(){
+      try {
+        let a = parseInt(prompt("Введите первое число:"));
+        let b = parseInt(prompt("Введите второе число:"));
+
+      if (isNaN(a) || isNaN(b)) {
+          throw new Error("Введено некорректное значение");
+      } 
+      else if (b === 0) {
+        throw new Error("На ноль делить нельзя");
+      }
+
+      let result = a / b;
+        document.write(`Результат деления: ${result}`);
+      } 
+      catch(error) {
+        document.write(`Произошла ошибка: ${error.message}`);
+      }
+    }
+  </script>
+</head>
+<body>
+   <p>Первое выражение: <span id="expr1"></span></p>
+   <p>Второе выражение: <span id="expr2"></p>
+   <p>Остаток от деления: <span id="result"></span></p>
+
+<input type='button' value='Задание 1' onclick='messageWrite()' />
+<input type='button' value='Задание 2' onclick='messageWrite2()' />
+<input type='button' value='Задание 3' onclick='messageWrite3()' />
+<input type='button' value='Задание 4' onclick='messageWrite4()' />
+<input type='button' value='Задание 5' onclick='messageWrite5()' />
+<input type='button' value='Задание 6' onclick='messageWrite6()' />
+<input type='button' value='Задание 7' onclick='messageWrite7()' />
+</body>
+</html>

@@ -1,0 +1,119 @@
+﻿<html>
+    <head>
+        <script type='text/javascript'>
+            function Gruppa() {
+                this.students = [];
+                this.add_stud = function(name) {
+                    this.students.push(name);
+                };
+                this.sub_stud = function(k) {
+                    this.students.splice(-k);
+                };
+                }
+            
+                var gr2 = new Gruppa(2,'ИСИТ', 28);
+                gr2.add_stud('Иван Иванов');
+                gr2.add_stud('Петр Петров');
+                gr2.add_stud('Петр Петров');
+
+                var gr3 = new Gruppa(3,'ИСИТ', 28);
+                gr3.add_stud('Воробьев Ярослав Маркович');
+                gr3.add_stud('Егорова Агния Львовна');   
+                gr3.add_stud('Николаева Софья Степановна');   
+                
+                var gr4 = new Gruppa(4,'ИСИТ', 28);
+                gr4.add_stud('Филиппова Софья Матвеевна');
+                gr4.add_stud('Софронова Софья Арсентьевна');
+                gr4.add_stud('Ефремов Филипп Михайлович');            
+                
+                function messageWrite01() {
+                    /* gr2.add_stud('Иван Иванов');
+                    gr2.add_stud('Петр Петров');
+                    gr2.add_stud('Петр Петров');
+                    gr3.add_stud('Воробьев Ярослав Маркович');
+                    gr3.add_stud('Егорова Агния Львовна');   
+                    gr3.add_stud('Николаева Софья Степановна');
+                    gr4.add_stud('Филиппова Софья Матвеевна');
+                    gr4.add_stud('Софронова Софья Арсентьевна');
+                    gr4.add_stud('Ефремов Филипп Михайлович');   */
+                    document.write('Список группы 1 :' + '','', gr2.students,"<br \/>")
+                    document.write('Список группы 2 :' + '','', gr3.students,"<br \/>")
+                    document.write('Список группы 3 :' + '','', gr4.students,"<br \/>")
+                }
+                
+                function messageWrite02() {
+                    gr2.sub_stud(2);
+                    gr3.sub_stud(1);
+                    gr4.sub_stud(3);
+                    document.write('После удаления 2 последних записей в группе 1:' + gr2.students,"<br \/>")
+                    document.write('После удаления 1 последних записей в группе 2:' + gr3.students,"<br \/>")
+                    document.write('После удаления 3 последних записей в группе 3:' + gr4.students,"<br \/>")
+                }
+            
+            function messageWrite() {
+                document.write('Списки студентов:' + gr2.students);
+
+            }
+
+            function messageWrite2() {
+
+                // Определяем объект Студент
+                function Student(firstName, lastName, physics, math, computerScience) {
+                this.firstName = firstName; // Имя студента
+                this.lastName = lastName; // Фамилия студента
+                this.physics = physics; // Оценка по физике
+                this.math = math; // Оценка по математике
+                this.computerScience = computerScience; // Оценка по информатике
+                }
+
+                // Метод вывода имени и фамилии студента в окно
+                Student.prototype.printName = function() {
+                alert(this.firstName + ' ' + this.lastName);
+                };
+
+                // Метод рассчета среднего бала студента
+                Student.prototype.calcAvgScore = function() {
+                const sum = this.physics + this.math + this.computerScience;
+                const avgScore = sum / 3;
+                return avgScore;
+                };
+
+                // Создаем несколько экземпляров объекта Студент
+                const student1 = new Student('Иван', 'Иванов', 4, 5, 3);
+                const student2 = new Student('Петр', 'Петров', 4, 4, 4);
+                const student3 = new Student('Сидор', 'Сидоров', 3, 5, 5);
+
+                // Вывод информации о всех студентах
+                document.write('Имя и фамилия студента 1: ' + student1.firstName + ' ' + student1.lastName + '<br>');
+                document.write('Средний балл студента 1: ' + student1.calcAvgScore() + '<br>');
+                document.write('Имя и фамилия студента 2: ' + student2.firstName + ' ' + student2.lastName + '<br>');
+                document.write('Средний балл студента 2: ' + student2.calcAvgScore() + '<br>');
+                document.write('Имя и фамилия студента 3: ' + student3.firstName + ' ' + student3.lastName + '<br>');
+                document.write('Средний балл студента 3: ' + student3.calcAvgScore() + '<br>');
+
+                // Добавляем свойство "курс" всем студентам
+                Student.prototype.course = 1;
+                student1.course = 2;
+                student2.course = 3;
+                student3.course = 4;
+
+                // Вывод информации о всех студентах, включая номер курса
+                document.write('Имя и фамилия студента 1: ' + student1.firstName + ' ' + student1.lastName + ', курс: ' + student1.course + '<br>');
+                document.write('Средний балл студента 1: ' + student1.calcAvgScore() + '<br>');
+                document.write('Имя и фамилия студента 2: ' + student2.firstName + ' ' + student2.lastName + ', курс: ' + student2.course + '<br>');
+                document.write('Средний балл студента 2: ' + student2.calcAvgScore() + '<br>');
+                document.write('Имя и фамилия студента 3: ' + student3.firstName + ' ' + student3.lastName + ', курс: ' + student3.course + '<br>');
+                document.write('Средний балл студента 3: ' + student3.calcAvgScore() + '<br>');
+            }
+
+           
+        </script>
+    </head>
+    <body>
+        <input type='button' value='Список группы>' onclick='messageWrite01()' />
+        <input type='button' value='Delete' onclick='messageWrite02()' />
+        <input type='button' value='Задание 1' onclick='messageWrite()' />
+        <input type='button' value='Задание 2' onclick='messageWrite2()' />
+
+    </body>
+</html>

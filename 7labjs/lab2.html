@@ -1,0 +1,87 @@
+﻿<html>
+<head>
+<script type="text/javascript">
+function messageWrite() {
+   document.write('Текст выводится на страницу с помощью JavaScript!');
+}
+function messageWrite2() {
+   
+   a= +prompt('Введите число a');
+   b= +prompt('Введите число b');
+  document.write('<table border=1>'); 
+   for(i=1;i<=a;i+=1){
+    document.write('<tr>');
+    for(j=1;j<=b;j+=1){
+	 
+     document.write('<td>');
+	   document.write(i*j);
+     document.write('</td>');
+	   
+	
+	}
+    document.write('</tr>');   
+   }
+   document.write('</table>');
+}
+function messageWrite3(){
+   let a = 1;
+   let b = 5;
+   let r = a;
+   let table = "<table border=1><tr><th>Радиус</th><th>Площадь круга</th><th>Длина окружности</th></tr>";
+
+   do {
+   let s = Math.PI * Math.pow(r, 2);
+   let c = 2 * Math.PI * r;
+   table += `<tr><td>${r.toFixed(1)}</td><td>${s.toFixed(2)}</td><td>${c.toFixed(2)}</td></tr>`;
+   r += 0.3;
+   } 
+   while (r <= b);
+
+   table += "<table>";
+   document.write(table);
+}
+function messageWrite4(){
+   let integerNumber = new Number(5);
+   let floatNumber = new Number(3.14159);
+
+   console.log(integerNumber.toExponential(2));  // '5.00e+0'
+   console.log(floatNumber.toExponential(3));   // '3.142e+0'
+   console.log(integerNumber.toFixed(2));       // '5.00'
+   console.log(floatNumber.toFixed(4));         // '3.1416'
+   console.log(integerNumber.toPrecision(3));   // '5.00'
+   console.log(floatNumber.toPrecision(6));     // '3.14159'
+   console.log(integerNumber.toString(16));     // '5'
+   console.log(floatNumber.toString());         // '3.14159'
+
+   let table = "<table border=1><tr><th>Число</th><th>Метод</th><th>Результат</th><th>Описание метода</th></tr>";
+
+   // Метод toExponential
+   table += `<tr><td>${integerNumber}</td><td>toExponential(2)</td><td>${integerNumber.toExponential(2)}</td><td>Возвращает число в экспоненциальной записи с указанным количеством знаков после запятой</td></tr>`;
+   table += `<tr><td>${floatNumber}</td><td>toExponential(3)</td><td>${floatNumber.toExponential(3)}</td><td>Возвращает число в экспоненциальной записи с указанным количеством знаков после запятой</td></tr>`;
+
+   // Метод toFixed
+   table += `<tr><td>${integerNumber}</td><td>toFixed(2)</td><td>${integerNumber.toFixed(2)}</td><td>Возвращает число с указанным количеством знаков после запятой</td></tr>`;
+   table += `<tr><td>${floatNumber}</td><td>toFixed(4)</td><td>${floatNumber.toFixed(4)}</td><td>Возвращает число с указанным количеством знаков после запятой</td></tr>`;
+
+   // Метод toPrecision
+   table += `<tr><td>${integerNumber}</td><td>toPrecision(3)</td><td>${integerNumber.toPrecision(3)}</td><td>Возвращает число в научной или обычной записи с указанным количеством значащих цифр</td></tr>`;
+   table += `<tr><td>${floatNumber}</td><td>toPrecision(6)</td><td>${floatNumber.toPrecision(6)}</td><td>Возвращает число в научной или обычной записи с указанным количеством значащих цифр</td></tr>`;
+
+   // Метод toString
+   table += `<tr><td>${integerNumber}</td><td>toString(16)</td><td>${integerNumber.toString(16)}</td><td>Возвращает число в виде строки в указанной системе счисления (от 2 до 36)</td></tr>`;
+   table += `<tr><td>${floatNumber}</td><td>toString()</td><td>${floatNumber.toString()}</td><td>Возвращает число в виде строки</td></tr>`;
+
+   table += "<table>";
+   document.write(table);
+}
+
+</script>
+</head>
+<body>
+<input type='button' value='Задание 1' onclick='messageWrite()' />
+<input type='button' value='Задание 2' onclick='messageWrite2()' />
+<input type='button' value='Задание 3' onclick='messageWrite3()' />
+<input type='button' value='Задание 4' onclick='messageWrite4()' />
+
+</body>
+</html>

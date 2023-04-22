@@ -1,0 +1,106 @@
+﻿<html>
+<head>
+<script type="text/javascript">
+// Функция выводит текст на страницу
+function messageWrite() {
+   document.write('Текст выводится на страницу с помощью JavaScript!');
+}
+function messageWrite2() {
+   a = new Array();
+   a[0]=6*Math.PI*Math.PI+3*Math.E^8 ;
+   a[1]=2*Math.cos(4)+Math.cos(12) + 8 * Math.E^3;
+   a[2]=3*Math.sin(9)+Math.log(5)+Math.sqrt(3);
+   a[3]=2*Math.tan(5)+6*Math.PI+Math.sqrt(12);
+   for(i=0;i<=3;i+=1){
+    document.write(' ' +a[i]+'<br>');
+   }
+
+}
+function messageWrite3() {
+   let methods = ["pow", "pop", "push", "shift", "round", "floor", "sline", "sort"];
+   let arrayMethods = [];
+   let mathMethods = [];
+
+   // Разделение методов на массивы
+   for (let i = 0; i < methods.length; i++) {
+   if (Array.prototype.hasOwnProperty(methods[i])) {
+      // если этот метод имеется в объекте Array, добавляем его в массив arrayMethods
+      arrayMethods.push(methods[i]);
+   } else if (Math.hasOwnProperty(methods[i])) {
+      // если этот метод имеется в объекте Math, добавляем его в массив mathMethods
+      mathMethods.push(methods[i]);
+   }
+   }
+
+   // Добавление новых методов
+   arrayMethods.unshift("concat"); // добавление в начало массива arrayMethods
+   mathMethods.push("ceil"); // добавление в конец массива mathMethods
+
+   document.write("Исходный массив:  " + methods, "<br \/>");
+   document.write("Методы объекта Array: " + arrayMethods, "<br \/>");
+   document.write("Методы объекта Math: " + mathMethods, "<br \/>");
+   document.write("Количество методов объекта Array: " + arrayMethods.length, "<br \/>");
+   document.write("Количество методов объекта Math: " + mathMethods.length, "<br \/>");
+}
+function showDate() {
+        // Получаем текущую дату и время
+        const date = new Date();
+
+        // Получаем элемент таблицы
+        const table = document.querySelector("table");
+
+        // Получаем значения компонентов даты и времени
+        const year = date.getFullYear();
+        const month = date.getMonth() + 1;
+        const day = date.getDate();
+        const hour = date.getHours();
+        const minute = date.getMinutes();
+        const second = date.getSeconds();
+
+        // Выводим значения в ячейки таблицы
+        document.getElementById("year").textContent = year;
+        document.getElementById("month").textContent = month;
+        document.getElementById("day").textContent = day;
+        document.getElementById("hour").textContent = hour;
+        document.getElementById("minute").textContent = minute;
+        document.getElementById("second").textContent = second;
+
+        // Показываем таблицу
+        table.style.display = "";
+}
+</script>
+</head>
+<body>
+<input type='button' value='Задание 1' onclick='messageWrite()' />
+<input type='button' value='Задание 2' onclick='messageWrite2()' />
+<input type='button' value='Задание 3' onclick='messageWrite3()' />
+<button onclick="showDate()">Задание 4</button>
+<table style="display:none">
+  <tr>
+    <td>Год</td>
+    <td id="year"></td>
+  </tr>
+  <tr>
+    <td>Месяц</td>
+    <td id="month"></td>
+  </tr>
+  <tr>
+    <td>День</td>
+    <td id="day"></td>
+  </tr>
+  <tr>
+    <td>Час</td>
+    <td id="hour"></td>
+  </tr>
+  <tr>
+    <td>Минуты</td>
+    <td id="minute"></td>
+  </tr>
+  <tr>
+    <td>Секунды</td>
+    <td id="second"></td>
+  </tr>
+</table>
+
+</body>
+</html>
