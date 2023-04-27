@@ -1,0 +1,65 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+ <script type="text/javascript" src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+
+<script type="text/javascript">
+ $(document).ready(function(){
+//Установим размер шрифта всех абзацев равным 20 пикселям
+   $("p").css("fontSize","100px");
+//Изменим на зеленый цвет шрифта элемента с id=el2
+   $("#el2").css("color","green");
+//Изменим на красный цвет шрифта элемента с class=el3
+   $(".el3").css("color","red");
+//Сделаем жирным шрифт элементов с id=el2 и class=el3
+   $("#el2,.el3").css("fontWeight","bold");
+//Изменим на синий цвет текста кнопки
+   $(":input").css("color","blue");
+//Установим размер шрифта всех элементов, имеющих атрибут href равным 20 пикселям
+   $("[href]").css("fontSize","20px");
+//Изменим на зеленый цвет ссылки на www.belstu.by 
+$("[href='http://www.belstu.by/']").css("color","green");
+
+$("p").mouseover(function(){$("p").css("color","green")});
+$("p").mouseout(function(){$("p").css("color","black")});
+
+ //$("#but1").click(function(){alert("Вы нажали один раз на первую кнопку!");});
+ 
+ //$("#but1").click(function(){$("p").fadeOut(3000)});
+ 
+ /*
+  $("#but1").click(function(){
+      $("p").animate({fontSize:30},2000);
+      $("p").animate({top:220},2000);
+      $("p").animate({fontSize:"1em"},2000);
+      $("p").animate({left:320},2000);
+      $("p").animate({top:0,left:0},2000);
+   });
+*/
+
+  $("#but1").click(function(){
+       $("p").css("color","red");
+   });
+
+ 
+ $("#but2").dblclick(function(){alert("Вы нажали два раза на вторую кнопку!");});
+
+  
+
+
+});
+</script>
+
+
+
+</head>
+<body>
+  <p>
+  Hello world
+  </p>
+  <button id="but1">Моя кнопка 1 </button>
+  <button id="but2">Моя кнопка 2 </button>
+  
+</body>
+</html>
+

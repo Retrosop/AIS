@@ -1,0 +1,125 @@
+* {
+	margin: 0; padding: 0;
+	box-sizing: border-box;
+}
+a, a:visited, a:hover, a:active, a:focus {
+	text-decoration:  none; outline: none;
+}
+body {
+	font: 16px/1.4 "Roboto", Helvetica, Arial, sans-serif;
+	-webkit-font-smoothing: antialiased;
+	font-smoothing: antialiased;
+	color: #888;
+}
+
+.container {
+	width: 460px;
+	margin: 10px auto;
+}
+#breakout-game {
+	background: #eee;
+}
+@media screen and (max-width: 460px) {
+	#breakout-game {
+		max-width: 100% !important;
+		width: 100% !important;
+	}
+}
+.modal-overlay {
+	position: fixed;
+	top: 0; left: 0; bottom: 0; right: 0;
+	background: rgba( 17, 67, 87, 0.95 );
+	display: none;
+}
+.modal-box {
+	position: fixed;
+	top: 50%; left: 50%;
+	-webkit-transform: translateX(-50%) translateY(-50%) scale(0);
+	        transform: translateX(-50%) translateY(-50%) scale(0);
+	width: 560px;
+	background: rgba(255,255,255,1);
+	padding: 40px 20px;
+	border-radius: 10px;
+	opacity: 0;
+	-webkit-transition: opacity 0.2s ease-out 0.2s, -webkit-transform 0.4s ease-out;
+	transition: opacity 0.2s ease-out 0.2s, transform 0.4s ease-out;
+}
+.game-over .modal-box {
+	opacity: 1;
+	-webkit-transform: translateX(-50%) translateY(-50%) scale(1);
+	        transform: translateX(-50%) translateY(-50%) scale(1);
+}
+.modal-box {
+	text-align: center;
+}
+.modal-box h3 {
+	font-size: 44px;
+	font-weight: normal;
+	color: #111;
+	margin-bottom: 0.15em;
+	letter-spacing: -2px;
+}
+.modal-score {
+	margin-bottom: 15px;
+	font-size: 24px;
+	color: #444;
+}
+.btn-play-again {
+	background: #114357;
+	display: inline-block;
+	color: #fff;
+	padding: 0 1.4em;
+	height: 42px;
+	line-height: 42px;
+	border-radius: 4px;
+}
+.btn-play-again:hover {
+	background: #19556D;
+}
+.modal-message {
+	margin-bottom: 20px;
+}
+
+
+.game-notifications {
+	margin: 20px auto 0;
+	width: 460px;
+}
+.life {
+	list-style-type: none;
+	float: right;
+}
+.instr {
+	float: left;
+}
+.heart {
+	display: inline-block;
+	width: 24px;
+	height: 19px;
+	background: #fff url('img/heart.png') no-repeat top left;
+	background-size: 24px auto;
+	transition: all 0.4s ease;
+	-webkit-transition: all 0.4s ease;
+} 
+.heart-o {
+	background: #fff url('img/heart.png') no-repeat 0 -23px;
+	background-size: 24px auto;
+	position: relative; top: 1px; /* Cheating haha */
+}
+
+.clearfix:after {
+	visibility: hidden;
+	display: block;
+	font-size: 0;
+	content: " ";
+	clear: both;
+	height: 0;
+}
+.instr-footer {
+	text-align:  center;
+	text-transform: uppercase;
+	font-size: 13px;
+	letter-spacing: 1px;
+	line-height: 1.8;
+	margin-top: 30px;
+}

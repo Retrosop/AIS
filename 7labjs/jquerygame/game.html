@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Breakout</title>
+	<link rel="stylesheet" href="style.css">
+	<h1 align = "center">Breakout</h1>
+	<script type="text/javascript">
+  function startTimer(bo) {
+    var my_timer = document.getElementById("my_timer");
+    var time = my_timer.innerHTML;
+    var arr = time.split(":");
+    var h = arr[0];
+    var m = arr[1];
+    var s = arr[2];
+	if (bo) boo=true;
+	if (bo==false) boo=false;
+    if (s == 0) {
+      if (m == 0) {
+        if (h == 0) {
+          alert("TIME UP");
+          window.location.reload();
+          return;
+        }
+        h--;
+        m = 60;
+        if (h < 10) h = "0" + h;
+      }
+      m--;
+      if (m < 10) m = "0" + m;
+      s = 99;
+    }
+    else s--;
+    if (s < 10) s = "0" + s;
+    document.getElementById("my_timer").innerHTML = h+":"+m+":"+s;
+	if (boo) {setTimeout(startTimer, 10);}
+	else if (boo==false) {setTimeout(startTimer, 100000000000000);}
+  }
+</script>
+	<h2 align = "center"><a href="records.html">Records</a></h2>
+</head>
+<body>
+	<p align = "center"><span id="my_timer" style="color: #f00; font-size: 150%; font-weight: bold;" >01:00:00</span></p>
+	<!-- Top Bar -->
+	<div class="game-notifications clearfix">
+		<div class="instr">
+			Score : 0
+		</div>
+		<ul class="life">
+			<li class="heart"></li>
+			<li class="heart"></li>
+			<li class="heart"></li>
+		</ul>
+	</div>
+
+	<!-- Game Container -->
+	<div class="container">
+		<canvas id="breakout-game" height="430" width="460"></canvas>
+	</div>
+	<div class="container">
+		<div class="instr-footer">
+			<small>
+				Use left and right keys to move paddle.
+				<br>
+				Press spacebar to start game.	
+			</small>
+		</div>
+	</div>
+
+	<!-- Modal for game over -->
+	<div class="modal-overlay">
+	</div>
+	<div class="modal-box">
+		<h3>Game Over</h3>
+		<p class="modal-message">Congratulations, you've beaten the game. Would you like to play again?</p>
+		<a href="#" class="btn-play-again">Play breakout again!</a>
+	</div>
+
+	<!-- Load Google Font Roboto -->
+	<script type="text/javascript">
+		WebFontConfig = {
+		    google: { families: [ 'Roboto::latin' ] }
+		};
+		(function() {
+		    var wf = document.createElement('script');
+		    wf.src = ('https:' == document.location.protocol ? 'https' : 'http') +
+		      '://ajax.googleapis.com/ajax/libs/webfont/1/webfont.js';
+		    wf.type = 'text/javascript';
+		    wf.async = 'true';
+		    var s = document.getElementsByTagName('script')[0];
+		    s.parentNode.insertBefore(wf, s);
+		})(); 
+	</script>
+	
+	<!-- Load Jquery 1.11.3 -->	
+	<script src="jquery.js"></script>
+
+	<script src="game.js"></script>
+		
+</body>
+</html>
