@@ -1,0 +1,85 @@
+<html>
+    <head>
+        <script>
+            function go1()
+            {
+                for(let i = 0; i < document.all.length; i++) 
+                    alert(document.all.length[i]);                
+            }
+
+            function go2() 
+            {
+                for(let i = 0; i < document.body.childNodes.length; i++) 
+                    alert("Имя тега: " + document.body.childNodes[i].tagName + "\nТип: " + document.body.childNodes[i].nodeType);
+            }
+
+            function go3() 
+            {
+                var b = document.getElementsByTagName('b')[0];
+                b.innerHTML = 'Второй текст';
+                var b1 = document.getElementById('b1');
+                b1.innerHTML = 'Запомнил?';
+            }
+
+            function go4() 
+            {
+                var avg_val = 0;
+                parseInt(avg_val);
+                var count = 0;
+                var table = document.getElementById('myTable');
+                var rowLength = table.rows.length;
+                for (i = 0; i < rowLength; i++)
+                {
+                    var oCells = table.rows.item(i).cells;
+                    var cellLength = oCells.length;
+                    for(var j = 0; j < cellLength; j++)
+                    {
+                        j++;
+                        var cellVal = oCells.item(j).innerHTML;
+                        if(!isNaN(parseInt(cellVal))) 
+                        {
+                            avg_val = avg_val + parseInt(cellVal);
+                            count++;
+                        }
+                    }
+                }
+                var b = document.getElementById('avg');
+                b.innerHTML = parseFloat(avg_val) / count;
+            }
+        </script>
+    </head>
+    <body>
+        <text id="b1">
+            Запомни меня
+        </text><br>
+        <b>Первый текст</b><br>
+        <input type = "button" onclick = "go2()" value = "Задание1"/></br>
+        <input type = "button" onclick = "go2()" value = "Задание2"/>
+        <input type = "button" onclick = "go3()" value = "Задание3"/></br>
+        <input type = "button" onclick = "go4()" value = "Посчитать среднее"/>
+
+        <table id="myTable" border=1>
+            <tr>
+                <td>Студент </td><td>Балл </td>
+            </tr>
+            <tr>
+                <td>Иванов </td><td>10 </td>
+            </tr>
+            <tr>
+                <td>Сидоров </td><td>20 </td>
+            </tr>
+            <tr>
+                <td>Петров </td><td>19 </td>
+            </tr>
+            <tr>
+                <td>Максимов </td><td>14 </td>
+            </tr>
+            <tr>
+                <td>Андреев </td><td>12 </td>
+            </tr>
+            <tr>
+                <td>Средний балл </td><td id="avg"> </td>
+            </tr>
+        </table>
+    </body>
+</html>
