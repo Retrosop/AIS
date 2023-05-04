@@ -1,0 +1,37 @@
+Options -Indexes
+
+#ErrorDocument 403 /e403.html
+
+#ErrorDocument 404 /e404.html
+
+#RewriteEngine on
+#RewriteCond %{REQUEST_FILENAME} !-d
+#RewriteCond %{REQUEST_FILENAME} !-f
+#RewriteRule . main.php [L]
+
+SetEnvIfNoCase user-Agent ^FrontPage [NC,OR]
+SetEnvIfNoCase user-Agent ^Java.* [NC,OR]
+SetEnvIfNoCase user-Agent ^Microsoft.URL [NC,OR]
+SetEnvIfNoCase user-Agent ^MSFrontPage [NC,OR]
+SetEnvIfNoCase user-Agent ^Offline.Explorer [NC,OR]
+SetEnvIfNoCase user-Agent ^[Ww]eb[Bb]andit [NC,OR]
+SetEnvIfNoCase user-Agent ^Zeus [NC]
+Deny from env=bad_bot
+
+
+
+
+#Alternate default index page
+#DirectoryIndex main.php
+
+RewriteEngine On
+RewriteRule ^(.*)$ https://www.htaccess.ru/$1 [R=301,L]
+
+#RewriteEngine on
+#RewriteCond %{REMOTE_ADDR} ^66\.249\.74\.
+#RewriteRule ^ - [F]
+
+#Order Allow,Deny
+#Deny from 66.249.74.0/24
+#Allow from all
+
