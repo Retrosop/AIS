@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE note SYSTEM "note.dtd">
+<note>
+	<note>
+	   <to>Анна</to>
+	   <from>Дмитрий</from>
+	   <heading>Напоминание</heading>
+	   <body>Не забудь обо мне в эти выходные!</body>
+	</note>
+</note>
