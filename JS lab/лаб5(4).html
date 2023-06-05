@@ -1,0 +1,57 @@
+<html>
+<head>
+        <title>
+            О лосях
+        </title>
+    </head>
+    <body>
+        Правда о лосях.
+        <ol>
+            <span>
+                Лось - животное хитрое
+            </span>
+            <span id="ddd">
+                .. И коварное
+            </span>
+        </ol>
+    </body>
+	<button onclick="gfg_Run()">
+    Change
+	</button>
+<script type='text/javascript'>
+function Student(name,secondName,Fiz,Mathh,infor) 
+	{
+	//Свойства(номер, специальность, количество)
+	this.name=name;
+	this.secondName=secondName;
+	this.Fiz=Fiz;
+	this.Mathh=Mathh;
+	this.infor=infor;
+	//Метод (добавить студентов в группу))
+	this.sayname=function sayname() 
+		{
+			let c = (Fiz+Mathh+infor)/3;
+			c=c.toFixed(2);
+			return c
+		}
+	}
+Student1=new Student("Иван", 'Ивановский', 4,5,5);
+Student2=new Student("Самир", 'Сорокин', 5,4,3);
+Student3=new Student("Пётр", 'Жуковский', 2,4,5);
+Student.prototype.n_gruppe;
+Student1.n_gruppe = 1;
+Student2.n_gruppe = 2;
+Student3.n_gruppe = 3;
+var span = document.getElementById("ddd");
+function gfg_Run(){
+var sr = Student1.sayname();
+span.textContent = sr;
+}
+for(i=0;i<span.length;i++)
+{
+  document.write(span[i].innerHTML);
+}
+</script>
+</head>
+</html>
+

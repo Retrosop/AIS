@@ -1,0 +1,28 @@
+<html>
+<style type='text/css'>
+#wrap {
+margin:1px;
+padding:20px;
+height:160px;
+background-color:green;
+}
+</style>
+<head>
+<table border = 1, id='wrap'>
+<script type='text/javascript'>
+ let a=+prompt("Введите число");
+ let b=+prompt("Введите число");
+ for (let i=1;i<=a;i++)
+ {
+	document.write("<tr>");
+	for(let y=1;y<=b;y++)
+	{
+	document.write("<td>"+(i*y)+"</td>");
+	}
+  document.write("</tr>");
+}
+</script>
+</table>
+</head>
+</html>
+

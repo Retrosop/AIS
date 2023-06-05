@@ -1,0 +1,32 @@
+<html>
+<style type='text/css'>
+#wrap {
+margin:2px;
+padding:40px;
+height:200px;
+background-color:yellow;
+}
+</style>
+<head>
+<table border = 1, id='wrap'>
+<script type='text/javascript'>
+ let a=+prompt("Введите начальный радиус");
+ let b=+prompt("Введите конечный радиус");
+ do
+ {
+	let s = 3.14 * a^2;
+	let d = 2*3.14*a;
+	s = s.toPrecision(3)
+	d = d.toPrecision(3)
+	a +=0.3;
+	document.write("<tr>");
+	document.write("<td>"+(s)+"</td>");
+	document.write("<td>"+(d)+"</td>");
+	document.write("</tr>");
+ }
+ while(a<=b)
+</script>
+</table>
+</head>
+</html>
+

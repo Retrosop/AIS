@@ -1,0 +1,30 @@
+<html>
+    <head>
+        <title>
+            О лосях
+        </title>
+    </head>
+    <body>
+        Правда о лосях.
+        <ol>
+            <span>
+                Лось - животное хитрое
+            </span>
+            <span id="ddd">
+                .. И коварное
+            </span>
+        </ol>
+    </body>
+<script type='text/javascript'>
+var x = document.getElementsByTagName("span");
+for(i=0;i<x.length;i++)
+{
+  document.write(x[i].innerHTML);
+}
+var y = document.getElementById("ddd");
+document.write("</br>")
+y.textContent = "ff";
+</script>
+</head>
+</html>
+

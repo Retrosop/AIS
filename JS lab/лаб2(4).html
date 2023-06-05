@@ -1,0 +1,57 @@
+<html>
+<style type='text/css'>
+#wrap {
+margin:1px;
+padding:10px;
+height:100px;
+background-color:yellow;
+}
+</style>
+<head>
+<table border = 1, id='wrap'>
+<script type='text/javascript'>
+ let a=+prompt("Введите дробное число");
+ let b=+prompt("Введите целое число");
+ 
+ function fun1(x)
+ {
+  let xb = x;
+	document.write("<tr>");
+	document.write("<td>"+(x)+"</td>");
+	document.write("<td>"+"toExponential(3)"+"</td>");
+	xb = x.toExponential(3)
+	document.write("<td>"+ xb+ "</td>");
+	document.write("<td>"+"представляет число в экспоненциальной форме"+"</td>");
+	document.write("</tr>");
+	
+	document.write("<tr>");
+	document.write("<td>"+""+"</td>");
+	document.write("<td>"+"toFixed(2)"+"</td>");
+	xb = x.toFixed(2)
+	document.write("<td>"+xb+"</td>");
+	document.write("<td>"+"представляет число в форме с двумя цифрами после точки"+"</td>");
+	document.write("</tr>");
+	
+	document.write("<tr>");
+	document.write("<td>"+""+"</td>");
+	document.write("<td>"+"toPrecision(2)"+"</td>");
+	xb = x.toPrecision(2)
+	document.write("<td>"+ xb+ "</td>");
+	document.write("<td>"+"представляет число с общим количеством значащих цифр равным двух"+"</td>");
+	document.write("</tr>");
+	
+	document.write("<tr>");
+	document.write("<td>"+""+"</td>");
+	document.write("<td>"+"toString(16)"+"</td>");
+	xb = x.toString(16)
+	document.write("<td>"+xb+ "</td>");
+	document.write("<td>"+"Строковое представление числа в 16-ричной системе счисления"+"</td>");
+	document.write("</tr>");
+ }
+	fun1(a);
+	fun1(b);
+</script>
+</table>
+</head>
+</html>
+

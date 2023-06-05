@@ -1,0 +1,50 @@
+<html>
+<style type='text/css'>
+#wrap {
+margin:1px;
+padding:1px;
+height:200px;
+background-color:#6e91c4;
+}
+</style>
+<head, id='wrap'>
+<script type='text/javascript'>
+function Student(name,secondName,Fiz,Mathh,infor) 
+	{
+	//Свойства(номер, специальность, количество)
+	this.name=name;
+	this.secondName=secondName;
+	this.Fiz=Fiz;
+	this.Mathh=Mathh;
+	this.infor=infor;
+	//Метод (добавить студентов в группу)
+	this.sayname=function sayname() 
+		{
+			let c = (Fiz+Mathh+infor)/3;
+			
+			document.write(this.name+" "+this.secondName+" Средний балл - "+c.toFixed(2)+"<br\>"); 
+		}
+	}
+Student1=new Student("Иван", 'Ивановский', 4,5,5);
+Student1.sayname();
+
+Student2=new Student("Самир", 'Сорокин', 5,4,3);
+Student2.sayname();
+
+Student3=new Student("Пётр", 'Жуковский', 2,4,5);
+Student3.sayname();
+Student.prototype.n_gruppe;
+Student1.n_gruppe = 1;
+Student2.n_gruppe = 2;
+Student3.n_gruppe = 3;
+document.write("<br\>")
+document.write("Группа - "+Student1.n_gruppe+":");
+Student1.sayname();
+document.write("Группа - "+Student2.n_gruppe+":");
+Student2.sayname();
+document.write("Группа - "+Student3.n_gruppe+":");
+Student3.sayname();
+</script>
+</head>
+</html>
+
