@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="ru">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Document</title>
+
+        <script>
+            function go1(status) 
+            {
+                el = document.getElementById('d1');
+                fontSize = parseFloat(window.getComputedStyle(el, null).getPropertyValue('font-size'));
+                el.style.fontSize = (status ? (fontSize - 1) : (fontSize + 1)) + 'px';
+
+                let data = "0123456789ABCDEF", ccc = '#';
+                for(let i = 0 ; i < 6; i++)
+                    ccc = ccc + data[getRandomNumber(0, data.length-1)];  
+
+                el.style.color = ccc;
+            }
+
+            function getRandomNumber(min, max) { return Math.round(Math.random() * (max - min) + min); }
+        </script>
+    </head>
+    <body>
+        <div id="d1">
+            Привет
+        </div>
+        <input type="button" onclick="go1(true)" value="Увеличить">  <input type="button" onclick="go1(false)" value="Уменьшить">
+    </body>
+</html>
