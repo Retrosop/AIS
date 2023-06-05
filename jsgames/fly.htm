@@ -1,0 +1,530 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+<title>(c) DX</title>
+</head>
+<body onkeydown="controlMe(event);">
+<div style="left:0px;top:0px;position:absolute;border-width:1px 1px 1px 1px;border-color:#c0c0c0;border-style:solid;width:940px;height:430px;padding:0px 0px 0px 0px;margin:0px 0px 0px 0px;">
+</div>
+<pre><div id='lifes' style='background-color:black;color:yellow;position:absolute;left:0px;top:0px;'>Lifes: 5</div>
+<div id='score' style='background-color:black;color:yellow;position:absolute;left:75px;top:0px;'>EXP: 0</div>
+<div id='hard' style='background-color:black;color:lightgreen;position:absolute;left:170px;top:0px;'>Hardness: 0</div>
+<div id='lvl' style='background-color:black;color:lightblue;position:absolute;left:300px;top:0px;'>LVL: 1</div>
+<div id='money' style='background-color:black;color:lightgreen;position:absolute;left:365px;top:0px;'>Points: 0</div>
+
+<div id='acc' style='background-color:black;color:gold;position:absolute;left:470px;top:0px;'>Accuracy: 100%</div>
+
+<div id='msg' style='background-color:black;color:lightblue;position:absolute;left:615px;top:0px;'>Game Started!</div>
+
+
+<div id='bonus' style='color:yellow;position:absolute;display:none;font-size:20px;font-weight:bold;background-color:black;'>:D</div>
+<span id='obj'></span></pre>
+
+<script language='JavaScript'>
+var level=1;
+var tanks=0;
+var enemies=0;
+var speeds=new Array();
+var ennum=0;
+var invs,ihard,binv;
+var hard=0;
+var bullets=new Array();
+var score=0;
+var tankspeed=5;
+var bspeed=30;
+var yspeed=new Array();
+var bsp1=0,bsp2=0,btype=0,bY=0,bSP=0,bullnum=0,bmax=6,money=0,totalbul=0,totalkill=0,superbombs=0;
+
+var minspeed=1;
+var lifes=5;
+
+var r1=27,r2=20;
+
+var BID=0;
+
+
+
+function controlMe(e)
+{
+  if(!e)
+    e=event;
+
+  if(!lifes)
+    return false;
+
+  var tmp;
+
+  switch(e.keyCode)
+  {
+    case 39:
+      tmp=tankPosX(tank1);
+      if(tmp<500)
+        posTank(tank1,tmp+tankspeed,tankPosY(tank1));
+    break;
+
+    case 37:
+      tmp=tankPosX(tank1);
+      if(tmp>0)
+      posTank(tank1,tmp-tankspeed,tankPosY(tank1));
+    break;
+
+    case 38:
+      tmp=tankPosY(tank1);
+      if(tmp<400)
+        posTank(tank1,tankPosX(tank1),tmp+tankspeed);
+    break;
+
+    case 40:
+      tmp=tankPosY(tank1);
+      if(tmp>0)
+        posTank(tank1,tankPosX(tank1),tmp-tankspeed);
+    break;
+
+    case 32:
+      if(bullnum>bmax)
+        return;
+
+      money--;
+      document.getElementById('money').innerHTML='Points: '+money;
+
+
+      createBullet('&nbsp;~',bsp1);
+      if(level>3) createBullet('~',bsp2);
+      if(level>5) createBullet('=',0);
+
+      document.getElementById('acc').innerHTML='Accuracy: '+Math.round(1000.0*totalkill/totalbul)/10.0+'%';
+
+    break;
+    case 16:
+      if(!superbombs)
+        return false;
+
+      superbombs--;
+
+      KillAll();
+    break;
+  }
+}
+
+function createBullet(sym,sp)
+{
+  var cbid=BID;
+  totalbul++;
+
+  for(var t=0;t<BID;t++)
+  {
+    if(!bullets[t] && document.getElementById('b'+t))
+    {
+      cbid=t;
+      break;
+    }
+  }
+
+  if(cbid==BID)
+  {
+    BID++;
+    document.getElementById('obj').innerHTML+="<span style='position:absolute;font-size:25px;font-weight:bold;left:"+(tankPosX(tank1)+50)+"px;top:"+(400-tankPosY(tank1))+"px' id='b"+cbid+"'>"+sym+"</span>";  
+  }
+  else
+  {
+    document.getElementById('b'+cbid).style.top=(400-tankPosY(tank1))+"px";
+    document.getElementById('b'+cbid).style.left=(tankPosX(tank1)+50)+"px";
+    document.getElementById('b'+cbid).innerHTML=sym;
+  }
+
+  bullets[cbid]=1;
+  bullnum++;
+
+  yspeed[cbid]=sp;
+}
+
+function controlBullet()
+{
+  var tmp,tmp3,oldlevel;
+
+  var x1,x2,y1,y2;
+
+  for(t=0;t<BID;t++)
+  {
+    if(bullets[t])
+    {
+      tmp=document.getElementById('b'+t).style;
+
+      tmp.left=(parseInt(tmp.left)+bspeed)+"px";
+      x1=parseInt(tmp.top);
+      if(x1<400) tmp.top=(x1+yspeed[t])+"px";
+
+      y1=parseInt(tmp.top);
+      x1=parseInt(tmp.left);
+
+
+      if(parseInt(tmp.left)>900)
+      {
+        document.getElementById('b'+t).style.left="-100px";
+        bullets[t]=0;
+        bullnum--;
+      }
+
+      for(var k=0;k<ennum;k++)
+      {
+        tmp3=document.getElementById('e'+k).style;
+
+        if(tmp3.display=='none')
+          continue;
+
+        y2=parseInt(tmp3.top);
+        x2=parseInt(tmp3.left);
+
+        if(Math.abs(x1-x2)<r1 && Math.abs(y1-y2)<r2)
+        {
+          tmp3.display='none';
+          tmp.left="-100px";
+          bullets[t]=0;
+          bullnum--;
+          totalkill++;
+
+          score+=speeds[k]*10;
+          money+=speeds[k];
+          CountMe();
+
+          break;
+        }
+      }
+    }
+  }
+}
+
+function showMsg(txt)
+{
+  document.getElementById('msg').innerHTML=txt;
+}
+
+
+
+function createTank()
+{
+  document.getElementById('obj').innerHTML+="<span style='position:absolute;font-size:25px;font-weight:bold;' id='t"+tanks+"'>::=</span>";
+  return tanks++;
+}
+
+function posTank(id,X,Y)
+{
+  document.getElementById('t'+id).style.top=400-Y;
+  document.getElementById('t'+id).style.left=X;
+}
+
+function tankPosY(id)
+{
+  return 400-parseInt(document.getElementById('t'+id).style.top);
+}
+
+function tankPosX(id)
+{
+  return parseInt(document.getElementById('t'+id).style.left);
+}
+
+
+function controlEnemy()
+{
+  var tmp,tmp2;
+
+  for(var id=0;id<ennum;id++)
+  {
+    tmp=document.getElementById('e'+id).style;
+    tmp2=parseInt(tmp.left);
+
+    if(tmp2<-10)
+    {
+      tmp.left="900px";
+      tmp.top=Math.round(Math.random()*400)+"px";
+      speeds[id]=Math.round(Math.random()*(2+minspeed))+1;
+      minspeed+=0.05;
+
+
+      if(tmp.display=='none')
+      {
+        tmp.display='block';
+      }
+      else
+      {
+        lifes--;
+        document.getElementById("lifes").innerHTML='Lifes: '+lifes;
+        if(lifes==0)
+          Fail();
+      }
+
+      return;
+    }
+
+
+    tmp.left=(tmp2-speeds[id])+"px";
+
+    tmp2=parseInt(tmp.top)+Math.round(Math.random()*(15+hard))-Math.round(Math.random()*(15+hard));
+    if(tmp2<30)
+      tmp2=30;
+    else if(tmp2>400)
+      tmp2=400;
+
+    tmp.top=tmp2+"px";
+  }
+}
+
+function createEnemy(needid)
+{
+  var tp=Math.round(Math.random()*400);
+  document.getElementById('obj').innerHTML+="<span style='font-weight:bold;position:absolute;left:900px;font-size:25px;top:"+tp+"px;' id='e"+needid+"'>=+</span>";
+  document.getElementById('e'+needid).style.display='block';
+
+  speeds[needid]=Math.round(Math.random()*2)+1;
+  ennum++;
+
+  return needid;
+}
+
+function controlBonus()
+{
+  if(!btype)
+    return true;
+
+  var tmp=document.getElementById('bonus').style;
+  var tmp2=parseInt(tmp.left);
+
+  tmp.left=(tmp2-bSP)+"px";
+
+
+  if(tmp2<-15)
+  {
+    tmp.display='none';
+    tmp.left="900px";
+    btype=0;
+  }
+
+  tmp2=parseInt(tmp.top);
+
+  if((bY<0 && tmp2<=30) || (bY>0 && tmp2>=370))
+    bY=-bY;
+
+
+  if((bY<0 && tmp2>30) || (bY>0 && tmp2<370))
+    tmp.top=(tmp2+Number(bY))+"px";
+
+
+  var tmp3=document.getElementById('t'+tank1).style;
+  var x1,y1,x2,y2;
+
+  y2=parseInt(tmp3.top);
+  x2=parseInt(tmp3.left);
+  y1=parseInt(tmp.top);
+  x1=parseInt(tmp.left);
+
+  if(Math.abs(x1-x2)<28 && Math.abs(y1-y2)<20)
+  {
+    tmp.display='none';
+    tmp.left="900px";
+
+    switch(btype)
+    {
+      case 1:
+        lifes++;
+        document.getElementById("lifes").innerHTML='Lifes: '+lifes;
+      break;
+      case 2:
+        KillAll();
+      break;
+      case 3:
+        Fail();
+      break;
+    }
+
+    btype=0;
+  }
+}
+
+
+function createBonus()
+{
+  if(Math.random()>0.2 || btype>0)
+    return false;
+
+  var tmp=Math.random();
+
+  if(tmp<0.475)
+    btype=1;
+  else if(tmp<0.95)
+    btype=2;
+  else
+    btype=3;
+
+  switch(btype)
+  {
+    case 1:
+      document.getElementById('bonus').innerHTML='LIFE';
+    break;
+    case 2:
+      document.getElementById('bonus').innerHTML='KILL';
+    break;
+    case 3:
+      document.getElementById('bonus').innerHTML="<span style='color:lightblue;'>FAIL</span>";
+    break;
+  }
+
+  bY=Math.round(Math.random()*40)-Math.round(Math.random()*40);
+  bSP=Math.round(Math.random()*7)+3;
+
+  document.getElementById('bonus').style.display='block';
+  document.getElementById('bonus').style.left="900px";
+  document.getElementById('bonus').style.top=Math.round(Math.random()*400)+"px";
+}
+
+
+
+function AddHardness()
+{
+  hard++;
+  createEnemy(ennum);
+  document.getElementById('hard').innerHTML='Hardness: '+hard;
+}
+
+
+
+function CountMe()
+{
+  document.getElementById('score').innerHTML='EXP: '+score;
+  document.getElementById('money').innerHTML='Points: '+money;
+  document.getElementById('acc').innerHTML='Accuracy: '+Math.round(1000.0*totalkill/totalbul)/10.0+'%';
+
+
+  oldlevel=level;
+
+  if(score>=11500)
+    level=11;
+  else if(score>=8500)
+    level=10;
+  else if(score>=7000)
+    level=9;
+  else if(score>=5500)
+    level=8;
+  else if(score>=4000)
+    level=7;
+  else if(score>=3000)
+    level=6;
+  else if(score>=1800)
+    level=5;
+  else if(score>=1000)
+    level=4;
+  else if(score>=500)
+    level=3;
+  else if(score>=200)
+    level=2;
+
+
+
+  if(level==2 && oldlevel==1)
+  {
+    tankspeed=10;
+    showMsg('Level 2! Speed Bonus!');
+  }
+  else if(level==3 && oldlevel==2)
+  {
+    bspeed=50;
+    showMsg('Level 3! Bullets Speed Bonus!');
+  }
+  else if(level==4 && oldlevel==3)
+  {
+    showMsg('Level 4! Double Bullets!');
+  }
+  else if(level==5 && oldlevel==4)
+  {
+    bsp1=2;
+    bsp2=-2;
+    showMsg('Level 5! Super Bullets!');
+  }
+  else if(level==6 && oldlevel==5)
+  {
+    bsp1=3;
+    bsp2=-3;
+    showMsg('Level 6! Triple Super Bullets!');
+  }
+  else if(level==7 && oldlevel==6)
+  {
+    bmax=18;
+    showMsg('Level 7! Increased Maximum Bullet Number!');
+  }
+  else if(level==8 && oldlevel==7)
+  {
+    r2=27;
+    r1=30;
+    showMsg('Level 8! Increased Bullet Radius!');
+  }
+  else if(level==9 && oldlevel==8)
+  {
+    bsp1=5;
+    bsp2=-5;
+    showMsg('Level 9! Increased bullet range!');
+  }
+  else if(level==10 && oldlevel==9)
+  {
+    minspeed=3;
+    showMsg('Level 10! Enemies Slowed Down!');
+  }
+  else if(level==11 && oldlevel==10)
+  {
+    superbombs=2;
+    showMsg('Level 11! Gained 2 Superbombs, press SHIFT to use!');
+  }
+
+  document.getElementById('lvl').innerHTML='LVL: '+level;
+}
+
+function Fail()
+{
+  alert("You FAILED!\r\nFFFFFFFFFUUUUUUUUUUUUUUUU!!!\r\n\r\nYour Score: "+score+"!\r\nYour Points: "+money+"!\r\nYour Accuracy: "+(totalbul>0 ? Math.round(1000.0*totalkill/totalbul)/10.0 : 0)+"%");
+  clearInterval(binv);
+  clearInterval(binv2);
+  clearInterval(ihard);
+  clearInterval(invs);
+  document.getElementById('t'+tank1).style.display='none';
+
+
+  document.getElementById('bonus').style.display='none';
+  for(var h=0;h<ennum;h++)
+  {
+    document.getElementById('e'+h).style.display='none';
+  }
+}
+
+function KillAll()
+{
+  for(var k=0;k<ennum;k++)
+  {
+    if(document.getElementById('e'+k).style.display!='none')
+    {
+      document.getElementById('e'+k).style.display='none';
+      score+=speeds[k]*10;
+      money+=speeds[k];
+      CountMe();
+    }
+  }
+}
+
+
+var tank1=createTank();
+posTank(tank1,0,0);
+
+
+for(var ii=0;ii<5;ii++)
+{
+  createEnemy(ii);
+}
+
+invs=setInterval(function(){controlEnemy();},50);
+setInterval(function(){controlBullet();},50);
+ihard=setInterval(function(){AddHardness();},25000);
+binv=setInterval(function(){createBonus();},5500);
+
+binv2=setInterval(function(){controlBonus();},20);
+
+</script>
+
+</body>
+</html>

@@ -1,0 +1,1206 @@
+<html><head>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+<title>Крестики-нолики by DX</title></head>
+<script language='JavaScript'>
+var x=3;
+var y=3;
+var mytp=1;
+var rows=3;
+var nregex=/^\d+$/g;
+var steps=0;
+
+var chered=1;
+var cgame=false;
+
+
+
+var cf1=0;
+var cf2=0.6;
+var alg1=false;
+
+
+var sm=x*y;
+
+var xos=new Array();
+
+function makeField()
+{
+  x=document.getElementById("pw").value;
+  y=document.getElementById("ph").value;
+  mytp=document.getElementById("cpu").checked ? 1 : 2;
+  rows=document.getElementById("co").value;
+  alg1=document.getElementById("alg1").checked;
+
+  cgame=document.getElementById("cgame").checked ? true : false;
+
+  if(x.search(nregex)==-1 || y.search(nregex)==-1 || rows.search(nregex)==-1)
+  {
+    alert("Введены некорректрые данные поля!");
+    return false;
+  }
+
+  x=Number(x);
+  y=Number(y);
+  rows=Number(rows);
+
+  if(rows>y || rows>x || rows<2 || x<2 || y<2)
+  {
+    alert("Введены некорректрые данные поля!");
+    return false;
+  }
+
+
+  sm=x*y;
+  steps=0;
+  chered=1;
+
+  var i,j;
+  var txt="";
+  xos=new Array();
+
+  for(j=0;j<y;j++)
+  {
+    for(i=0;i<x;i++)
+    {
+      txt+="<input type='button' onclick='setXO("+i+","+j+");return false;' id='xo_"+i+"_"+j+"' value='&nbsp;' style='width:25px;width:25px;'>";
+      xos[j*x+i]=0;
+    }
+
+    txt+="<br>";
+  }
+
+  document.getElementById("xos").innerHTML=txt;
+
+  if(cgame)
+    delButtons();
+
+  document.getElementById("sbtn").disabled=false;
+
+  if(mytp==1 || cgame)
+    goComp();
+  else
+    document.getElementById("inf").innerHTML="Ваш ход";
+}
+
+function setXO(cx,cy,tp)
+{
+  if(!tp) tp=mytp;
+
+  document.getElementById("xo_"+cx+"_"+cy).disabled=true;
+  document.getElementById("xo_"+cx+"_"+cy).value= tp==1 ? '0' : 'X';
+  document.getElementById("xo_"+cx+"_"+cy).style.backgroundColor= tp==1 ? 'yellow' : 'lightblue';
+  xos[cy*x+cx]=tp;
+
+  steps++;
+
+  checkWinner(tp);
+}
+
+
+
+
+
+
+
+function checkWinner(tp)
+{
+  var zers;
+  var xses;
+  var zc="";
+  var xc="";
+
+  for(j=0;j<y;j++)
+  {
+    zers=xses=0;
+
+    for(i=0;i<x;i++)
+    {
+      if(xos[j*x+i]==1)
+      {
+        zers++;
+        zc+=i+","+j+";";
+        xc="";
+        xses=0;
+      }
+      else if(xos[j*x+i]==2)
+      {
+        xses++;
+        xc+=i+","+j+";";
+        zc="";
+        zers=0;
+      }
+      else
+      {
+        zers=0;
+        zc="";
+        xc="";
+        xses=0;
+      }
+
+      if(zers>=rows)
+      {
+        winType(1,zc);
+        return;
+      }
+      else if(xses>=rows)
+      {
+        winType(2,xc);
+        return;
+      }
+    }
+  }
+
+  zc="";
+  xc="";
+
+
+  for(i=0;i<x;i++)
+  {
+    zers=xses=0;
+
+    for(j=0;j<y;j++)
+    {
+      if(xos[j*x+i]==1)
+      {
+        zers++;
+        zc+=i+","+j+";";
+        xc="";
+        xses=0;
+      }
+      else if(xos[j*x+i]==2)
+      {
+        xses++;
+        xc+=i+","+j+";";
+        zc="";
+        zers=0;
+      }
+      else
+      {
+        zers=0;
+        zc="";
+        xc="";
+        xses=0;
+      }
+
+      if(zers>=rows)
+      {
+        winType(1,zc);
+        return;
+      }
+      else if(xses>=rows)
+      {
+        winType(2,xc);
+        return;
+      }
+    }
+  }
+
+
+  zc="";
+  xc="";
+
+  var ii,jj;
+
+
+  for(i=0;i<x;i++)
+  {
+    for(j=0;j<y;j++)
+    {
+      zers=xses=0;
+
+      for(jj=j,ii=i;jj<y && ii>=0;jj++,ii--)
+      {
+        if(xos[jj*x+ii]==1)
+        {
+          zers++;
+          zc+=ii+","+jj+";";
+          xc="";
+          xses=0;
+        }
+        else if(xos[jj*x+ii]==2)
+        {
+          xses++;
+          xc+=ii+","+jj+";";
+          zc="";
+          zers=0;
+        }
+        else
+        {
+          zers=0;
+          zc="";
+          xc="";
+          xses=0;
+        }
+
+        if(zers>=rows)
+        {
+          winType(1,zc);
+          return;
+        }
+        else if(xses>=rows)
+        {
+          winType(2,xc);
+          return;
+        }
+      }
+    }
+  }
+
+  zc="";
+  xc="";
+
+
+  for(i=0;i<x;i++)
+  {
+    for(j=0;j<y;j++)
+    {
+      zers=xses=0;
+
+      for(jj=j,ii=i;jj<y && ii<x;jj++,ii++)
+      {
+        if(xos[jj*x+ii]==1)
+        {
+          zers++;
+          zc+=ii+","+jj+";";
+          xc="";
+          xses=0;
+        }
+        else if(xos[jj*x+ii]==2)
+        {
+          xses++;
+          xc+=ii+","+jj+";";
+          zc="";
+          zers=0;
+        }
+        else
+        {
+          zers=0;
+          zc="";
+          xc="";
+          xses=0;
+        }
+
+        if(zers>=rows)
+        {
+          winType(1,zc);
+          return;
+        }
+        else if(xses>=rows)
+        {
+          winType(2,xc);
+          return;
+        }
+      }
+    }
+  }
+
+  if(steps>=sm)
+  {
+    alert("Ничья!");
+    delButtons();
+    return;
+  }
+
+
+  if(tp==mytp || cgame)
+    goComp();
+  else
+    document.getElementById("inf").innerHTML="Ваш ход";
+}
+
+
+
+function winType(tp,btn)
+{
+  delButtons();
+
+  var barr=btn.split(";").reverse();
+  var cnt=barr.length;
+  var b2;
+
+
+  for(i=rows;i>=1;i--)
+  {
+    b2=barr[i].split(",");
+    if(b2[1])
+      document.getElementById("xo_"+b2[0]+"_"+b2[1]).style.backgroundColor="red";
+  }
+
+  if(!cgame)
+  {
+    if(tp==mytp)
+      alert("Ты выиграл!");
+    else
+      alert("Компьютер победил!");
+  }
+  else
+  {
+    if(tp==1)
+      alert("Компьютер 1 выиграл!");
+    else
+      alert("Компьютер 2 выиграл!");
+  }
+}
+
+
+
+function delButtons()
+{
+  for(j=0;j<y;j++)
+  {
+    for(i=0;i<x;i++)
+    {
+      document.getElementById("xo_"+i+"_"+j).disabled=true;
+    }
+  }
+
+  document.getElementById("inf").innerHTML="";
+}
+
+function goComp()
+{
+  if(!cgame)
+  {
+    document.getElementById("inf").innerHTML="Ходит компьютер...";
+  }
+  else
+  {
+    var tmp= chered==1 ? 2 : 1;
+    document.getElementById("inf").innerHTML="Ходит компьютер #"+chered+"...";
+  }
+
+  setTimeout("goComp2()",1);
+}
+
+function stopGame()
+{
+  cgame=false;
+  setTimeout("delButtons()",700);
+  return;
+}
+
+function goComp2()
+{
+  var i,j,ii,jj,curr,myp,maxinrow,c1,c2,xwas,c3,c4,mr1,mr2,mr3,mr4;
+  var cl1,cr1,cl2,cr2,cl3,cr3,cl4,cr4;
+
+  if(cgame)
+  {
+    mytp=chered;
+    myp= mytp==1 ? 2 : 1;
+    chered=myp;
+  }
+  else
+  {
+    myp= mytp==1 ? 2 : 1;
+  }
+
+  var coeff=new Array();
+  for(j=0;j<y;j++)
+  {
+    for(i=0;i<x;i++)
+    {
+      curr=j*x+i;
+
+      if(xos[curr]>0)
+        continue;
+
+
+      xos[curr]=myp;
+
+
+      maxinrow=0;
+      xwas=false;
+      c1=0;
+      c2=0;
+      c3=0;
+      c4=0;
+      mr1=0;
+      mr2=0;
+      mr3=0;
+      mr4=0;
+      cl1=cr1=cl2=cr2=cl3=cr3=cl4=cr4=0;
+
+      for(ii=i;ii>=0;ii--)
+      {
+        if(xos[j*x+ii]==mytp)
+          break;
+
+        maxinrow++;
+
+        if(xos[j*x+ii]==0)
+          xwas=true;
+
+        if(xwas==false && xos[j*x+ii]==myp)
+        {
+          mr1++;
+          c1+=cf1;
+        }
+        else
+        {
+          cl1++;
+          c1+=cf2;
+        }
+      }
+
+
+      xwas=false;
+
+      for(ii=i+1;ii<x;ii++)
+      {
+        if(xos[j*x+ii]==mytp)
+          break;
+
+        maxinrow++;
+
+        if(xos[j*x+ii]==0)
+          xwas=true;
+
+        if(xwas==false && xos[j*x+ii]==myp)
+        {
+          mr1++;
+          c1+=cf1;
+        }
+        else
+        {
+          cr1++;
+          c1+=cf2;
+        }
+      }
+
+      if(maxinrow<rows)
+      {
+        mr1=0;
+        c1=0;
+      }
+
+
+
+
+      maxinrow=0;
+      xwas=false;
+
+      for(jj=j;jj>=0;jj--)
+      {
+        if(xos[jj*x+i]==mytp)
+          break;
+
+        maxinrow++;
+
+        if(xos[jj*x+i]==0)
+          xwas=true;
+
+        if(xwas==false && xos[jj*x+i]==myp)
+        {
+          mr2++;
+          c2+=cf1;
+        }
+        else
+        {
+          cl2++;
+          c2+=cf2;
+        }
+      }
+
+
+      xwas=false;
+
+      for(jj=j+1;jj<y;jj++)
+      {
+        if(xos[jj*x+i]==mytp)
+          break;
+
+        maxinrow++;
+
+        if(xos[jj*x+i]==0)
+          xwas=true;
+
+        if(xwas==false && xos[jj*x+i]==myp)
+        {
+          mr2++;
+          c2+=cf1;
+        }
+        else
+        {
+          cr2++;
+          c2+=cf2;
+        }
+      }
+
+      if(maxinrow<rows)
+      {
+        mr2=0;
+        c2=0;
+      }
+
+
+
+
+
+      maxinrow=0;
+      xwas=false;
+
+
+      for(jj=j,ii=i;jj>=0 && ii>=0;jj--,ii--)
+      {
+        if(xos[jj*x+ii]==mytp)
+          break;
+
+        maxinrow++;
+
+        if(xos[jj*x+ii]==0)
+          xwas=true;
+
+        if(xwas==false && xos[jj*x+ii]==myp)
+        {
+          mr3++;
+          c3+=cf1;
+        }
+        else
+        {
+          cl3++;
+          c3+=cf2;
+        }
+      }
+
+
+      xwas=false;
+
+      for(jj=j+1,ii=i+1;jj<y && ii<x;jj++,ii++)
+      {
+        if(xos[jj*x+ii]==mytp)
+          break;
+
+        maxinrow++;
+
+        if(xos[jj*x+ii]==0)
+          xwas=true;
+
+        if(xwas==false && xos[jj*x+ii]==myp)
+        {
+          mr3++;
+          c3+=cf1;
+        }
+        else
+        {
+          cr3++;
+          c3+=cf2;
+        }
+      }
+
+      if(maxinrow<rows)
+      {
+        mr3=0;
+        c3=0;
+      }
+
+
+
+
+
+
+      maxinrow=0;
+      xwas=false;
+
+      for(jj=j,ii=i;jj<y && ii>=0;jj++,ii--)
+      {
+        if(xos[jj*x+ii]==mytp)
+          break;
+
+        maxinrow++;
+
+        if(xos[jj*x+ii]==0)
+          xwas=true;
+
+        if(xwas==false && xos[jj*x+ii]==myp)
+        {
+          mr4++;
+          c4+=cf1;
+        }
+        else
+        {
+          cl4++;
+          c4+=cf2;
+        }
+      }
+
+
+      xwas=false;
+
+      for(jj=j-1,ii=i+1;jj>=0 && ii<x;jj--,ii++)
+      {
+        if(xos[jj*x+ii]==mytp)
+          break;
+
+        maxinrow++;
+
+        if(xos[jj*x+ii]==0)
+          xwas=true;
+
+        if(xwas==false && xos[jj*x+ii]==myp)
+        {
+          mr4++;
+          c4+=cf1;
+        }
+        else
+        {
+          cr4++;
+          c4+=cf2;
+        }
+      }
+
+      if(maxinrow<rows)
+      {
+        mr4=0;
+        c4=0;
+      }
+
+      coeff[curr]=c1+c2+c3+c4;
+
+      if((mr1>=rows-1 && cl1>0 && cr1>0) || (mr2>=rows-1 && cl2>0 && cr2>0) || (mr3>=rows-1 && cl3>0 && cr3>0) || (mr4>=rows-1 && cl4>0 && cr4>0))
+        coeff[curr]+=90;
+
+
+      xos[curr]=0;
+
+
+
+
+
+
+
+
+
+
+
+/* add algorythm */
+
+
+
+
+
+
+      xos[curr]=mytp;
+
+
+      maxinrow=0;
+      xwas=false;
+      c1=0;
+      c2=0;
+      c3=0;
+      c4=0;
+      mr1=0;
+      mr2=0;
+      mr3=0;
+      mr4=0;
+      cl1=cr1=cl2=cr2=cl3=cr3=cl4=cr4=0;
+
+      for(ii=i;ii>=0;ii--)
+      {
+        if(xos[j*x+ii]==myp)
+          break;
+
+        maxinrow++;
+
+        if(xos[j*x+ii]==0)
+          xwas=true;
+
+        if(xwas==false && xos[j*x+ii]==mytp)
+        {
+          mr1++;
+          c1+=cf1;
+        }
+        else
+        {
+          cl1++;
+          c1+=cf2;
+        }
+      }
+
+
+      xwas=false;
+
+      for(ii=i+1;ii<x;ii++)
+      {
+        if(xos[j*x+ii]==myp)
+          break;
+
+        maxinrow++;
+
+        if(xos[j*x+ii]==0)
+          xwas=true;
+
+        if(xwas==false && xos[j*x+ii]==mytp)
+        {
+          mr1++;
+          c1+=cf1;
+        }
+        else
+        {
+          cr1++;
+          c1+=cf2;
+        }
+      }
+
+      if(maxinrow<rows)
+      {
+        mr1=0;
+        c1=0;
+      }
+
+
+
+
+      maxinrow=0;
+      xwas=false;
+
+      for(jj=j;jj>=0;jj--)
+      {
+        if(xos[jj*x+i]==myp)
+          break;
+
+        maxinrow++;
+
+        if(xos[jj*x+i]==0)
+          xwas=true;
+
+        if(xwas==false && xos[jj*x+i]==mytp)
+        {
+          mr2++;
+          c2+=cf1;
+        }
+        else
+        {
+          cl2++;
+          c2+=cf2;
+        }
+      }
+
+
+      xwas=false;
+
+      for(jj=j+1;jj<y;jj++)
+      {
+        if(xos[jj*x+i]==myp)
+          break;
+
+        maxinrow++;
+
+        if(xos[jj*x+i]==0)
+          xwas=true;
+
+        if(xwas==false && xos[jj*x+i]==mytp)
+        {
+          mr2++;
+          c2+=cf1;
+        }
+        else
+        {
+          cr2++;
+          c2+=cf2;
+        }
+      }
+
+      if(maxinrow<rows)
+      {
+        mr2=0;
+        c2=0;
+      }
+
+
+
+
+
+      maxinrow=0;
+      xwas=false;
+
+
+      for(jj=j,ii=i;jj>=0 && ii>=0;jj--,ii--)
+      {
+        if(xos[jj*x+ii]==myp)
+          break;
+
+        maxinrow++;
+
+        if(xos[jj*x+ii]==0)
+          xwas=true;
+
+        if(xwas==false && xos[jj*x+ii]==mytp)
+        {
+          mr3++;
+          c3+=cf1;
+        }
+        else
+        {
+          cl3++;
+          c3+=cf2;
+        }
+      }
+
+
+      xwas=false;
+
+      for(jj=j+1,ii=i+1;jj<y && ii<x;jj++,ii++)
+      {
+        if(xos[jj*x+ii]==myp)
+          break;
+
+        maxinrow++;
+
+        if(xos[jj*x+ii]==0)
+          xwas=true;
+
+        if(xwas==false && xos[jj*x+ii]==mytp)
+        {
+          mr3++;
+          c3+=cf1;
+        }
+        else
+        {
+          cr3++;
+          c3+=cf2;
+        }
+      }
+
+      if(maxinrow<rows)
+      {
+        mr3=0;
+        c3=0;
+      }
+
+
+
+
+
+
+      maxinrow=0;
+      xwas=false;
+
+      for(jj=j,ii=i;jj<y && ii>=0;jj++,ii--)
+      {
+        if(xos[jj*x+ii]==myp)
+          break;
+
+        maxinrow++;
+
+        if(xos[jj*x+ii]==0)
+          xwas=true;
+
+        if(xwas==false && xos[jj*x+ii]==mytp)
+        {
+          mr4++;
+          c4+=cf1;
+        }
+        else
+        {
+          cl4++;
+          c4+=cf2;
+        }
+      }
+
+
+      xwas=false;
+
+      for(jj=j-1,ii=i+1;jj>=0 && ii<x;jj--,ii++)
+      {
+        if(xos[jj*x+ii]==myp)
+          break;
+
+        maxinrow++;
+
+        if(xos[jj*x+ii]==0)
+          xwas=true;
+
+        if(xwas==false && xos[jj*x+ii]==mytp)
+        {
+          mr4++;
+          c4+=cf1;
+        }
+        else
+        {
+          cr4++;
+          c4+=cf2;
+        }
+      }
+
+      if(maxinrow<rows)
+      {
+        mr4=0;
+        c4=0;
+      }
+
+
+      if((mr1>=rows-1 && cl1>0 && cr1>0) || (mr2>=rows-1 && cl2>0 && cr2>0) || (mr3>=rows-1 && cl3>0 && cr3>0) || (mr4>=rows-1 && cl4>0 && cr4>0))
+        coeff[curr]+=50;
+
+      xos[curr]=0;
+
+
+
+
+
+
+
+
+
+
+
+      maxinrow=0;
+      xwas=false;
+      c1=0;
+      c2=0;
+      c3=0;
+      c4=0;
+
+      for(ii=i-1;ii>=0;ii--)
+      {
+        if(xos[j*x+ii]!=mytp)
+          break;
+
+        c1++;
+      }
+
+
+      xwas=false;
+
+      for(ii=i+1;ii<x;ii++)
+      {
+        if(xos[j*x+ii]!=mytp)
+          break;
+
+        c1++;
+      }
+
+
+      xwas=false;
+
+      for(jj=j-1;jj>=0;jj--)
+      {
+        if(xos[jj*x+i]!=mytp)
+          break;
+
+        c2++;
+      }
+
+
+      xwas=false;
+
+      for(jj=j+1;jj<y;jj++)
+      {
+        if(xos[jj*x+i]!=mytp)
+          break;
+
+        c2++;
+      }
+
+      xwas=false;
+
+
+      for(jj=j-1,ii=i-1;jj>=0 && ii>=0;jj--,ii--)
+      {
+        if(xos[jj*x+ii]!=mytp)
+          break;
+
+        c3++;
+      }
+
+
+      xwas=false;
+
+      for(jj=j+1,ii=i+1;jj<y && ii<x;jj++,ii++)
+      {
+        if(xos[jj*x+ii]!=mytp)
+          break;
+
+        c3++;
+      }
+
+
+
+      xwas=false;
+
+      for(jj=j+1,ii=i-1;jj<y && ii>=0;jj++,ii--)
+      {
+        if(xos[jj*x+ii]!=mytp)
+          break;
+
+        c4++;
+      }
+
+
+      xwas=false;
+
+      for(jj=j-1,ii=i+1;jj>=0 && ii<x;jj--,ii++)
+      {
+        if(xos[jj*x+ii]!=mytp)
+          break;
+
+        c4++;
+      }
+
+      if(alg1) coeff[curr]+=Math.max(c1,c2,c3,c4)*75; else coeff[curr]+=Math.max(c1,c2,c3,c4);
+
+      if(Math.max(c1,c2,c3,c4)>=rows-1)
+        coeff[curr]+=70;
+
+      maxinrow=0;
+      xwas=false;
+      c1=0;
+      c2=0;
+      c3=0;
+      c4=0;
+
+      for(ii=i-1;ii>=0;ii--)
+      {
+        if(xos[j*x+ii]!=myp)
+          break;
+
+        c1++;
+      }
+
+
+      xwas=false;
+
+      for(ii=i+1;ii<x;ii++)
+      {
+        if(xos[j*x+ii]!=myp)
+          break;
+
+        c1++;
+      }
+
+
+      xwas=false;
+
+      for(jj=j-1;jj>=0;jj--)
+      {
+        if(xos[jj*x+i]!=myp)
+          break;
+
+        c2++;
+      }
+
+
+      xwas=false;
+
+      for(jj=j+1;jj<y;jj++)
+      {
+        if(xos[jj*x+i]!=myp)
+          break;
+
+        c2++;
+      }
+
+      xwas=false;
+
+
+      for(jj=j-1,ii=i-1;jj>=0 && ii>=0;jj--,ii--)
+      {
+        if(xos[jj*x+ii]!=myp)
+          break;
+
+        c3++;
+      }
+
+
+      xwas=false;
+
+      for(jj=j+1,ii=i+1;jj<y && ii<x;jj++,ii++)
+      {
+        if(xos[jj*x+ii]!=myp)
+          break;
+
+        c3++;
+      }
+
+
+
+      xwas=false;
+
+      for(jj=j+1,ii=i-1;jj<y && ii>=0;jj++,ii--)
+      {
+        if(xos[jj*x+ii]!=myp)
+          break;
+
+        c4++;
+      }
+
+
+      xwas=false;
+
+      for(jj=j-1,ii=i+1;jj>=0 && ii<x;jj--,ii++)
+      {
+        if(xos[jj*x+ii]!=myp)
+          break;
+
+        c4++;
+      }
+
+
+      if(Math.max(c1,c2,c3,c4)>=rows-1)
+        coeff[curr]+=5000;
+
+
+      //document.getElementById("xo_"+i+"_"+j).value=coeff[curr];
+
+    }
+
+  }
+
+
+
+
+  var maxnums=new Array();
+  var mnum=0;
+  curr=0;
+
+  for(i=0;i<sm;i++)
+  {
+    if(coeff[i]>mnum)
+      mnum=coeff[i];
+  }
+
+  for(i=0;i<sm;i++)
+  {
+    if(coeff[i]==mnum)
+    {
+      maxnums[curr]=i;
+      curr++;
+    }
+  }
+
+
+  var coord=maxnums[Math.round(Math.random()*(curr-1))];
+
+  var sy=0;
+  var sx=0;
+
+  while(coord>=x)
+  {
+    coord-=x;
+    sy++;
+  }
+
+  sx=coord;
+
+  if(!cgame) document.getElementById("inf").innerHTML="Ваш ход";
+
+  setXO(sx,sy,myp);
+}
+
+</script>
+<body bgcolor=#000000 text=#ffffff>
+<table border=0 style="width:100%;">
+<tr valign=center align=center><td id="xos">
+</td></tr></table><br>
+<center><span id="inf" style="color:yellow;"></span></center>
+<fieldset style="color:lightblue;"><legend style="color:wheat;">Игра</legend>
+<input type="radio" id="cpu" checked name="fh"> Первым ходит компьютер<br>
+<input type="radio" name="fh"> Первым ходит игрок<br>
+<input type="radio" name="fh" id="cgame"> Компьютер играет сам с собой<br>
+Поле: <input type="text" id="pw" value="3" style="width:40px"> X <input type="text" id="ph" value="3" style="width:40px"><br>
+Крестиков/ноликов в ряд для выигрыша: <input type="text" id="co" value="3" style="width:40px"><br><input type="checkbox" id="alg1">Альтернативный алгоритм компьютера
+<hr>
+<input type="button" onclick="makeField();return false;" value="Играть!"> <input type="button" onclick="stopGame();return false;" value="Закончить" disabled id="sbtn">
+</fieldset>
+</body></html>

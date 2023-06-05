@@ -1,0 +1,325 @@
+<html><head>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+<title>Сапёр by DX</title></head>
+<script language='JavaScript'>
+var x=10;
+var y=10;
+var mines=5;
+var mn=new Array();
+var nregex=/^\d+$/g;
+var usersmn=new Array();
+
+var sm=x*y;
+var tm;
+var secs=0;
+var vmines=0;
+
+
+function makeField()
+{
+  startTimer(0);
+  x=document.getElementById("pw").value;
+  y=document.getElementById("ph").value;
+  mines=document.getElementById("mines").value;
+  secs=0;
+
+  if(x.search(nregex)==-1 || y.search(nregex)==-1 || mines.search(nregex)==-1)
+  {
+    alert("Введены некорректрые данные поля!");
+    return false;
+  }
+
+  x=Number(x);
+  y=Number(y);
+  mines=Number(mines);
+  sm=x*y;
+
+  if(mines>=sm || mines<1 || x<5 || y<5)
+  {
+    alert("Введены некорректрые данные поля!");
+    return false;
+  }
+
+
+  var i,j;
+  var txt="";
+  var mnum=mines;
+  var prob=mines/sm;
+  mn=new Array();
+  usersmn=new Array();
+
+  for(j=0;j<y;j++)
+  {
+    for(i=0;i<x;i++)
+    {
+      txt+="<input type='button' onclick='setMine("+i+","+j+",event);return false;' id='m_"+i+"_"+j+"' value='&nbsp;' style='width:25px;width:25px;background-color:#99aaff;'>";
+      mn[j*x+i]=0;
+      usersmn[j*x+i]=0;
+    }
+
+    txt+="<br>";
+  }
+
+  var curr=0;
+
+  while(mnum>0)
+  {
+    if(Math.random()<prob && mn[curr]!=3)
+    {
+      mnum--;
+      mn[curr]=3;
+    }
+
+    curr++;
+    if(curr>=sm) curr=0;
+  }
+
+  vmines=mines;
+
+
+  document.getElementById("mns").innerHTML=txt;
+  document.getElementById("sg").disabled=false;
+  document.getElementById("nm").innerHTML="Мин: "+vmines;
+  startTimer(1);
+}
+
+
+
+function startTimer(t)
+{
+  if(t)
+  {
+    tm=setInterval("ttick()",1000);
+  }
+  else if(tm)
+  {
+    clearInterval(tm);
+    tm=0;
+  }
+}
+
+
+function ttick()
+{
+  secs++;
+  var minuts=parseInt(secs/60);
+  var tsecs=secs-minuts*60;
+  document.getElementById("tm").innerHTML="Время: "+minuts+" мин. "+tsecs+" сек.";
+}
+
+function setMine(mx,my,e)
+{
+  var curr=my*x+mx;
+
+  if(!e) e=event;
+
+  if(e.ctrlKey==false)
+  {
+    if(usersmn[curr]==1)
+    {
+      alert("Вы поставили тут мину, сначала снимите её!");
+      return;
+    }
+
+    tryMine(mx,my);
+    return;
+  }
+
+  if(usersmn[curr]==1)
+  {
+    document.getElementById("m_"+mx+"_"+my).value="";
+    document.getElementById("m_"+mx+"_"+my).style.backgroundColor='#99aaff';
+    vmines++;
+    usersmn[curr]=0;
+  }
+  else
+  {
+    document.getElementById("m_"+mx+"_"+my).value="M";
+    document.getElementById("m_"+mx+"_"+my).style.backgroundColor='orange';
+    vmines--;
+    usersmn[curr]=1;
+  }
+
+  document.getElementById("nm").innerHTML="Мин: "+vmines;
+}
+
+function tryMine(mx,my)
+{
+  var curr=my*x+mx;
+  if(mn[curr]==3)
+  {
+    openField();
+    alert("Вы проиграли!");
+    return false;
+  }
+
+  openBtn(mx,my);
+  checkWinner();
+}
+
+
+function checkWinner()
+{
+  for(i=0;i<sm;i++)
+  {
+    if(mn[i]==0)
+      return;
+  }
+
+  openField();
+  var minuts=parseInt(secs/60);
+  var tsecs=secs-minuts*60;
+  alert("Вы выиграли за время "+minuts+" мин. "+tsecs+" сек.!");
+}
+
+
+function openBtn(mx,my)
+{
+  var curr=my*x+mx;
+  if(mn[curr]==3 || mn[curr]==1)
+    return;
+
+
+  mn[curr]=1;
+
+  var tmp=getMines(mx,my);
+  var mx1,mx2,my1,my2;
+
+  mx1=mx-1;
+  mx2=mx+1;
+  my1=my-1;
+  my2=my+1;
+
+  document.getElementById("m_"+mx+"_"+my).value= tmp==0 ? ' ' : tmp;
+  document.getElementById("m_"+mx+"_"+my).style.backgroundColor= tmp==0 ? 'white' : '#e0e0e0';
+  document.getElementById("m_"+mx+"_"+my).disabled=true;
+
+
+  if(tmp==0)
+  {
+    if(mx1>=0) openBtn(mx1,my);
+    if(mx2<x) openBtn(mx2,my);
+    if(my1>=0) openBtn(mx,my1);
+    if(my2<y) openBtn(mx,my2);
+    if(mx1>=0 && my1>=0) openBtn(mx1,my1);
+    if(mx2<x && my2<y) openBtn(mx2,my2);
+    if(mx1>=0 && my2<y) openBtn(mx1,my2);
+    if(mx2<x && my1>=0) openBtn(mx2,my1);
+  }
+
+}
+
+
+function openField()
+{
+  var tmp;
+  startTimer(0);
+  document.getElementById("sg").disabled=true;
+  document.getElementById("tm").innerHTML="";
+  document.getElementById("nm").innerHTML="";
+  var curr;
+
+  for(j=0;j<y;j++)
+  {
+    for(i=0;i<x;i++)
+    {
+      curr=j*x+i;
+
+      if(mn[curr]==1)
+        continue;
+
+      document.getElementById("m_"+i+"_"+j).disabled=true;
+
+      if(mn[curr]==3)
+      {
+        document.getElementById("m_"+i+"_"+j).value="M";
+        document.getElementById("m_"+i+"_"+j).style.backgroundColor='orange';
+        continue;
+      }
+
+      tmp=getMines(i,j);
+      document.getElementById("m_"+i+"_"+j).value= tmp==0 ? ' ' : tmp;
+      if(usersmn[curr]==1)
+      {
+        document.getElementById("m_"+i+"_"+j).style.backgroundColor='yellow';
+      }
+      else
+      {
+        document.getElementById("m_"+i+"_"+j).style.backgroundColor= tmp==0 ? 'white' : '#e0e0e0';
+      }
+    }
+  }
+}
+
+
+
+function getMines(mx,my)
+{
+  var curr=my*x+mx;
+  var c1,c2,c3,c4,c5,c6,c7,c8;
+  c1=c2=c3=c4=c5=c6=c7=c8=0;
+
+  var mx1,mx2,my1,my2;
+
+  mx1=mx-1;
+  mx2=mx+1;
+  my1=my-1;
+  my2=my+1;
+
+  if(mx1>=0)
+  {
+    c1= mn[my*x+mx1]==3 ? 1 : 0
+
+    if(my1>=0)
+    {
+      c2= mn[my1*x+mx1]==3 ? 1 : 0
+    }
+
+    if(my2<y)
+    {
+      c3= mn[my2*x+mx1]==3 ? 1 : 0
+    }
+  }
+
+
+  if(mx2<x)
+  {
+    c4= mn[my*x+mx2]==3 ? 1 : 0
+
+    if(my1>=0)
+    {
+      c5= mn[my1*x+mx2]==3 ? 1 : 0
+    }
+
+    if(my2<y)
+    {
+      c6= mn[my2*x+mx2]==3 ? 1 : 0
+    }
+  }
+
+  if(my1>=0)
+  {
+    c7= mn[my1*x+mx]==3 ? 1 : 0
+  }
+
+  if(my2<y)
+  {
+    c8= mn[my2*x+mx]==3 ? 1 : 0
+  }
+
+  return c1+c2+c3+c4+c5+c6+c7+c8;
+}
+</script>
+<body bgcolor=#000000 text=#ffffff>
+<table border=0 style="width:100%;">
+<tr valign=center align=center><td id="mns">
+</td></tr></table><br>
+<center><span id="tm" style="color:yellow;"></span><br><span id="nm" style="color:lightblue;"></span></center>
+<fieldset style="color:lightblue;"><legend style="color:wheat;">Игра</legend>
+Поле: <input type="text" id="pw" value="10" style="width:40px"> X <input type="text" id="ph" value="10" style="width:40px"><br>
+Мин на поле: <input type="text" id="mines" value="15" style="width:40px"><hr>
+<input type="button" onclick="makeField();return false;" value="Играть!"> <input type="button" onclick="openField();return false;" id="sg" disabled value="Закончить">
+<hr>
+Используйте левую кнопку мыши, чтобы открыть поле. Чтобы установить помарку &quot;мина&quot;, используйте левую кнопку мыши с одновременно нажатой клавишей Ctrl.
+</fieldset>
+</body></html>

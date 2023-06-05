@@ -1,0 +1,297 @@
+<html><head>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+<title>Судоку by DX</title></head>
+<script language='JavaScript'>
+var steps=5;
+var nregex=/^\d+$/g;
+var usernums=new Array();
+
+var tm;
+var secs=0;
+var vmines=0;
+var x,y,cx,cy,tofill;
+x=y=9;
+var tc=125;
+var filled=0;
+
+
+
+function makeField()
+{
+  startTimer(0);
+  document.getElementById("nm").style.display="none";
+  steps=document.getElementById("diff").value;
+  secs=0;
+  filled=0;
+
+  if(steps.search(nregex)==-1)
+  {
+    alert("Введены некорректрые данные!");
+    return false;
+  }
+
+  steps=Number(steps);
+
+  if(steps>81 || steps<1)
+  {
+    alert("Введены некорректрые данные!");
+    return false;
+  }
+
+  tofill=steps;
+
+
+  var i,j;
+  var txt="";
+  usernums=new Array();
+
+  for(j=0;j<y;j++)
+  {
+    for(i=0;i<x;i++)
+    {
+      txt+="<input type='button' onclick='setNum("+i+","+j+",event);return false;' id='m_"+i+"_"+j+"' value='&nbsp;' style='width:25px;width:25px;background-color:#99aaff;'>";
+      if((i+1)%3==0) txt+='&nbsp;';
+      usernums[j*x+i]=0;
+    }
+
+    txt+="<br>";
+
+    if((j+1)%3==0) txt+="<span style='font-size:4px;'><br></span>";
+  }
+
+
+  var avnum=new Array();
+  var t,tmp;
+
+  document.getElementById("mns").innerHTML=txt;
+
+
+  var itr=0;
+
+  for(j=0;j<y;j++)
+  {
+    for(i=0;i<x;i++)
+    {
+      avnum=new Array();
+
+      for(t=0;t<10;t++)
+      {
+        if(getAvNum(i,j,t))
+          avnum.push(t);
+      }
+
+
+
+      tmp=avnum.length;
+
+      if(tmp==0)
+      {
+        for(i=0;i<x;i++)
+        {
+          usernums[j*x+i]=0;
+        }
+        j--;
+
+        itr++;
+        if(itr>tc)
+        {
+          setTimeout("makeField()",10);
+          return;
+        }
+        break;
+      }
+
+      usernums[j*x+i]=avnum[Math.floor(Math.random()*tmp)];
+    }
+  }
+
+  var curr=0;
+  var prob=steps/81.0;
+
+  while(steps>0)
+  {
+    if(Math.random()<prob && usernums[curr]>0)
+    {
+      steps--;
+      usernums[curr]=0;
+    }
+
+    curr++;
+    if(curr>=81) curr=0;
+  }
+
+
+
+  for(j=0;j<y;j++)
+  {
+    for(i=0;i<x;i++)
+    {
+      if(usernums[j*x+i]>0)
+      {
+        document.getElementById("m_"+i+"_"+j).disabled=true;
+        document.getElementById("m_"+i+"_"+j).value=usernums[j*x+i];
+      }
+      else
+      {
+        document.getElementById("m_"+i+"_"+j).style.backgroundColor='wheat';
+      }
+    }
+  }
+
+  startTimer(1);
+}
+
+
+
+
+
+
+function getAvNum(i,j,t)
+{
+  var ii,jj;
+  var allnums=new Array();
+
+  for(ii=0;ii<x;ii++)
+  {
+    allnums.push(usernums[j*x+ii]);
+  }
+
+  for(jj=0;jj<y;jj++)
+  {
+    allnums.push(usernums[jj*x+i]);
+  }
+
+  var kvx,kvy;
+
+  if(i<3)
+    kvx=0;
+  else if(i<6)
+    kvx=3;
+  else
+    kvx=6;
+
+  if(j<3)
+    kvy=0;
+  else if(j<6)
+    kvy=3;
+  else
+    kvy=6;
+
+
+  for(jj=kvy;jj<kvy+3;jj++)
+  {
+    for(ii=kvx;ii<kvx+3;ii++)
+    {
+      allnums.push(usernums[jj*x+ii]);
+    }
+  }
+
+  for(ii=0;ii<27;ii++)
+  {
+    if(allnums[ii]==t)
+      return false;
+  }
+
+  return true;
+}
+
+function setNum(i,j,e)
+{
+  if(!e) e=event;
+
+  cx=i;
+  cy=j;
+
+  var dv=document.getElementById("nm").style;
+  dv.left=e.clientX;
+  dv.top=e.clientY;
+  dv.display="block";
+}
+
+function sNum(v)
+{
+  document.getElementById("nm").style.display="none";
+
+  if(v==10 || Number(document.getElementById("m_"+cx+"_"+cy).value)==v)
+    return;
+
+  if(v==0)
+  {
+    filled--;
+    document.getElementById("m_"+cx+"_"+cy).value=' ';
+  }
+  else
+  {
+    if(getAvNum(cx,cy,v)==false)
+    {
+      alert("Сюда нельзя поставить "+v+".");
+      return;
+    }
+
+    document.getElementById("m_"+cx+"_"+cy).value=v;
+    filled++;
+  }
+
+
+  usernums[cy*x+cx]=v;
+
+  if(filled>=tofill)
+  {
+    for(j=0;j<y;j++)
+    {
+      for(i=0;i<x;i++)
+      {
+        document.getElementById("m_"+i+"_"+j).disabled=true;
+      }
+    }
+
+    startTimer(0);
+    document.getElementById("tm").innerHTML="";
+    var minuts=parseInt(secs/60);
+    var tsecs=secs-minuts*60;
+    alert("Победа! Игра заняла "+minuts+" мин. "+tsecs+" сек.!");
+  }
+}
+
+
+
+function startTimer(t)
+{
+  if(t)
+  {
+    tm=setInterval("ttick()",1000);
+  }
+  else if(tm)
+  {
+    clearInterval(tm);
+    tm=0;
+  }
+}
+
+
+function ttick()
+{
+  secs++;
+  var minuts=parseInt(secs/60);
+  var tsecs=secs-minuts*60;
+  document.getElementById("tm").innerHTML="Время: "+minuts+" мин. "+tsecs+" сек.";
+}
+
+
+</script>
+<body bgcolor=#000000 text=#ffffff>
+<div id="nm" style="border-color:orange;border-style:solid;border-width:2px 2px 2px 2px;display:none;position:absolute;background-color:lightgreen;">
+<input type="button" onclick="sNum(1);return false;" value="1" style='width:25px;width:25px;background-color:lightgreen;'><input type="button" onclick="sNum(2);return false;" value="2" style='width:25px;width:25px;background-color:lightgreen;'><input type="button" onclick="sNum(3);return false;" value="3" style='width:25px;width:25px;background-color:lightgreen;'><br><input type="button" onclick="sNum(4);return false;" value="4" style='width:25px;width:25px;background-color:lightgreen;'><input type="button" onclick="sNum(5);return false;" value="5" style='width:25px;width:25px;background-color:lightgreen;'><input type="button" onclick="sNum(6);return false;" value="6" style='width:25px;width:25px;background-color:lightgreen;'><br><input type="button" onclick="sNum(7);return false;" value="7" style='width:25px;width:25px;background-color:lightgreen;'><input type="button" onclick="sNum(8);return false;" value="8" style='width:25px;width:25px;background-color:lightgreen;'><input type="button" onclick="sNum(9);return false;" value="9" style='width:25px;width:25px;background-color:lightgreen;'><br><input type="button" onclick="sNum(0);return false;" value="?" style='width:25px;width:25px;background-color:lightgreen;' title='Снять цифру'><input type="button" onclick="sNum(10);return false;" value="X" style='width:25px;width:25px;background-color:lightgreen;' title='Закрыть'>
+</div>
+<table border=0 style="width:100%;">
+<tr valign=center align=center><td id="mns">
+</td></tr></table><br>
+<center><span id="tm" style="color:yellow;"></span></center>
+<fieldset style="color:lightblue;"><legend style="color:wheat;">Игра</legend>
+Пропусков: <input type="text" id="diff" value="15" style="width:40px"><hr>
+<input type="button" onclick="makeField();return false;" value="Играть!">
+<hr>
+Блокнот:<br>
+<textarea style="width:100%;" rows=7></textarea>
+</fieldset>
+</body></html>
