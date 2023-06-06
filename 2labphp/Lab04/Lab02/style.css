@@ -1,0 +1,45 @@
+.fon{
+background-image: url(fon.png);
+}
+.text{
+	width: 155px;
+	margin-left: 25px;
+	padding: 5px;
+	border: 1px solid #000;
+	background-color: #409070;
+	font-family: Courier New;
+	color: #000;
+	font-size: 25px;
+	font-weight: bold;
+}
+.submenu{
+	margin-top: 0;
+	font-family: Monotype Corsiva;
+	color: #fff;
+	font-size: 22px;
+	text-emphasis: underline;
+}
+.Btext{
+	font-family: Courier New;
+	color: Chocolate;
+	font-size: 35px;
+	font-weight: bold;
+}
+.Mtext{
+	font-family: arial;
+	color: #000;
+	font-size: 20px;
+	font-weight: bold;
+}
+a:link, a:visited, a:hover, a:active {
+	text-decoration: none;
+}
+a:link, a:visited {
+	color: #fff;
+}
+a:hover {
+	color: #000;
+}
+a:active {
+	color: #25447d;
+}
