@@ -1,0 +1,29 @@
+/* Стили для формы поиска */
+form {
+    background-color: #f9f9f9;
+    border: 1px solid #ccc;
+    padding: 20px;
+  }
+  
+  form label {
+    display: block;
+  }
+  
+  /* Стили для результатов поиска */
+  .card-title {
+    font-size: 20px;
+  }
+  
+  .card-text {
+    height: 100px;
+    overflow: hidden;
+  }
+  
+  .card-text p {
+    margin: 0;
+  }
+  
+  .card-img-top {
+    height: 200px;
+    object-fit: cover;
+  }
