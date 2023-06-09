@@ -1,0 +1,43 @@
+<html>
+<style type='text/css'>
+#wrap {
+margin:5px;
+padding:10px;
+height:200px;
+background-color:#6e91c4;
+}
+</style>
+<head>
+<table border = 1 , id='wrap'>
+<script type='text/javascript'>
+
+	let x =new Date();
+	document.write("<tr>");
+	document.write("<td>"+"Год"+"</td>");
+	document.write("<td>"+x.getFullYear()+"</td>");
+	document.write("</tr>");
+	document.write("<tr>");
+	document.write("<td>"+"Месяц"+"</td>");
+	document.write("<td>"+x.getMonth()+"</td>");
+	document.write("</tr>");
+	document.write("<tr>");
+	document.write("<td>"+"День"+"</td>");
+	document.write("<td>"+x.getDay()+"</td>");
+	document.write("</tr>");
+	document.write("<tr>");
+	document.write("<td>"+"Час"+"</td>");
+	document.write("<td>"+x.getHours()+"</td>");
+	document.write("</tr>");
+	document.write("<tr>");
+	document.write("<td>"+"Минуты"+"</td>");
+	document.write("<td>"+x.getMinutes()+"</td>");
+	document.write("</tr>");
+	document.write("<tr>");
+	document.write("<td>"+"Секунды"+"</td>");
+	document.write("<td>"+x.getSeconds()+"</td>");
+	document.write("</tr>");
+</script>
+</table>
+</head>
+</html>
+

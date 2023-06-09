@@ -1,0 +1,143 @@
+<html>
+<style type='text/css'>
+#wrap {
+margin:1px;
+padding:1px;
+height:150px;
+background-color:#6e91c4;
+}
+</style>
+<head, id='wrap'>
+
+<script type='text/javascript'>
+
+function Student(name,secondName,Fiz,Mathh,infor) 
+	{
+	//Свойства(номер, специальность, количество)
+	this.name=name;
+	this.secondName=secondName;
+	this.Fiz=Fiz;
+	this.Mathh=Mathh;
+	this.infor=infor;
+	//Метод (добавить студентов в группу)
+	this.sayname=function sayname() 
+		{
+			let c = (Fiz+Mathh+infor)/3;
+			
+			document.write(this.name+" "+this.secondName+" Средний балл - "+c.toFixed(2)+"<br\>"); 
+		}
+	
+	
+	}
+function Gruppa(n,spec,kolich) 
+	{
+	//Свойства(номер, специальность, количество)
+	this.n=n;
+	this.spec=spec;
+	this.kolich=kolich;
+	//Метод (добавить студентов в группу)
+	this.add_stud=function add_stud(k) 
+		{
+              this.kolich+=k;
+				
+		}
+	this.sub_stud = function sub_stud(k)
+		{
+			this.kolich-=k;
+			
+		}
+	
+	}
+function five()
+{
+return 5;
+}
+gr2=new Gruppa(2, 'Программисты', 14);
+gr2.add_stud(2);
+gr2.sub_stud(5);
+
+gr3=new Gruppa(3, 'Математики', 30);
+gr3.add_stud(1);
+gr3.sub_stud(9);
+
+gr4=new Gruppa(4, 'Энергетики', 15);
+gr4.add_stud(7);
+gr4.sub_stud(1);
+Student1=new Student("Иван", 'Ивановский', 4,5,5);
+Student2=new Student("Самир", 'Сорокин', 5,4,3);
+Student3=new Student("Пётр", 'Жуковский', 2,4,5);
+Student.prototype.n_gruppe;
+Student1.n_gruppe = 1;
+Student2.n_gruppe = 2;
+Student3.n_gruppe = 3;
+
+grope = new Array();
+grope[0] = "Student1";
+grope[1] = "Student2";
+grope[2] = "Student3";
+for(i=0;i<3;i++)
+{
+document.write(" "+grope[i]+" ")
+}
+document.write("<br\>")
+delete grope[2];
+for(i=0;i<2;i++)
+{
+document.write(" "+grope[i]+" ")
+}
+document.write("<br\>")
+document.write("<br\>")
+document.write("имеется ли у массива 2-й элемент ")
+document.write(1 in grope);
+document.write("<br\>")
+document.write("<br\>")
+document.write("наличие любого свойства у созданных ранее пользовательских объектов Gruppa и Студент ")
+document.write("kolich" in gr2);
+document.write(" и ");
+document.write("Fiz" in Student1);
+document.write("<br\>")
+document.write("<br\>")
+document.write("являются ли созданные объекты объектами Array, String, Object")
+document.write("<br\>")
+document.write("gr2 =Array? - ")
+document.write(gr2 instanceof Array)
+document.write("<br\>")
+document.write("Student1 =String? - ")
+document.write(Student1 instanceof String)
+document.write("<br\>")
+document.write("Student2 =Object? - ")
+document.write(Student2 instanceof Object)
+document.write("<br\>")
+document.write("<br\>")
+
+document.write(five())
+document.write("<br\>")
+document.write("<br\>")
+document.write("Тип Группы gr2-4 - ")
+document.write(typeof gr2)
+document.write(" ")
+document.write(typeof gr3)
+document.write(" ")
+document.write(typeof gr4)
+document.write("<br\>")
+document.write("<br\>")
+document.write("Тип Группы Student1-3 - ")
+document.write(typeof Student1)
+document.write(" ")
+document.write(typeof Student2)
+document.write(" ")
+document.write(typeof Student3)
+document.write("<br\>")
+document.write("<br\>")
+document.write("Тип массива grope - ")
+document.write(typeof grope)
+document.write("<br\>")
+document.write("<br\>")
+document.write("Тип функции five - ")
+document.write(typeof five())
+document.write("<br\>")
+document.write("<br\>")
+</script>
+</head>
+</html>
+

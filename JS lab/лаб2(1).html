@@ -1,0 +1,156 @@
+<html>
+<style type='text/css'>
+#wrap {
+margin:2px;
+padding:40px;
+height:200px;
+background-color:green;
+}
+</style>
+<head>
+<script type='text/javascript'>
+function fun1() {
+   alert('Вас приветствует учебный центр');
+   x=prompt('Введите Ваше имя:', 'Имя');
+   document.write('Здравствуйте, '+ x);
+   x = confirm("Хотите стать Web-дизайнером?");
+			if(x == true)
+			{
+			alert("Учите стили CSS и JavaScript!");
+			}
+			else{alert("Упускаете время!");}
+}
+function fun2() {
+
+	let x=+prompt('введите номер задания от 1 до 5');
+	let a;
+	let b;
+	switch (x)
+	{
+	case 1: 
+		a=+prompt('введите число');
+		b=+prompt('введите число');
+		alert(a+b);
+		break;
+	case 2: 
+		x=prompt('заполните строку');
+		y=prompt('заполните строку');
+		result = x+y;
+		alert(result);
+		break;
+	case 3: 
+		b=+prompt('введите число');
+		a=prompt('заполните строку');
+		alert(a+b);
+		break;
+	case 4:
+		a=prompt('заполните строку');
+		b=+prompt('введите число');
+		alert(a+b);
+		break;
+	case 5: alert("Результатом сложения строки и числа всегда будет строка");break;
+	}
+}
+function fun3() 
+{
+   	let x=+prompt('введите число');
+    let y=+prompt('введите число');
+	let v1=(15*x+25*y)/2+12;
+	let v2=(2*y/x+4*x-10)*3;
+	alert(v1);
+	alert(v2);
+	alert(v1%v2);
+	document.write(v1);
+	document.write("<br \/>");
+	document.write(v2);
+	document.write("<br \/>");
+	document.write(v1%v2);			
+}
+function fun4() 
+{
+	let x=+prompt('введите число');
+	if(x<20 || x>40 && x!=15 && x%5==0)
+	{
+	alert("Правильное значение");
+	}
+	else
+	{
+	alert("Не правильное значение");
+	}
+	
+	y=+prompt('введите число');
+	if(y>5 && y<20 && y%5==0)
+	{
+	alert("Правильное значение");
+	}
+	else
+	{
+	alert("Не правильное значение");
+	}
+}
+function fun5() 
+{
+	let x=+prompt('введите число');
+	let y=+prompt('введите число');
+	if(x>y)
+	{
+	alert(x+" больше "+ y);
+	}
+	else if(x==y)
+	{
+	alert(y+ " равно "+ x);
+	}
+	else
+	{
+	alert(x+ " меньше "+ y);
+	}
+}
+function fun6() 
+{
+	var d = new Date();
+	var day = d.getDay();
+	switch (day)
+	{
+	case 1: alert("Сегодня понедельник");
+	break;
+	case 2:alert("Сегодня вторник");
+	break;
+	case 3:alert("Сегодня среда");
+	break;
+	case 4:alert("Сегодня четверг");
+	break;
+	case 5:alert("Сегодня пятница");
+	break;
+	case 6:alert("Сегодня суббота");
+	break;
+	case 7:alert("Сегодня восресенье");
+	break;
+	}
+}
+function fun7() 
+{
+let x=+prompt('введите число не "10"');
+	try
+	{
+	if(x==10)
+	{
+	x=number;
+	}
+	}catch(err){
+	alert(err);
+	end;
+	}
+	alert("Код выполнен");
+}
+</script>
+</head>
+<body, id='wrap'>
+<input type='button' value='задание 1' onclick='fun1()' />
+<input type='button' value='задание 2' onclick='fun2()' />
+<input type='button' value='задание 3' onclick='fun3()' />
+<input type='button' value='задание 4' onclick='fun4()' />
+<input type='button' value='задание 5' onclick='fun5()' />
+<input type='button' value='задание 6' onclick='fun6()' />
+<input type='button' value='задание 7' onclick='fun7()' />
+</body>
+</html>

@@ -1,0 +1,43 @@
+<html>
+<style type='text/css'>
+#wrap {
+margin:1px;
+padding:20px;
+height:160px;
+background-color:#4588ed;
+}
+</style>
+<head, id='wrap'>
+<script type='text/javascript'>
+ let e = Math.E;
+ let x = 6*3.14^2 + 3* e^8;
+ a = new Array();
+ a[0]= x;
+ x = 2*Math.cos(4)+Math.cos(12)+8*e^3;
+ a[1]=x;
+ x=3*Math.sin(9)+Math.log(e)+Math.sqrt(3);
+ a[2]=x;
+ x=2*Math.tan(5)+6*3,14+Math.sqrt(12);
+ a[3]=x;
+ let first;
+ let max=0;
+ let min= 0;
+ 
+ for(i=0;i<4;i++)
+ {
+	first = a[i];
+	for(j=0;j<3;j++){
+		if(first>a[j])
+		{
+			if(first>max)
+			{
+				max = first;
+			}
+		}else if(first < min || min ==0){min = first;}
+	}
+}
+ document.write("min- "+min+" max- "+max);
+</script>
+</head>
+</html>
+

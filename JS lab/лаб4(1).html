@@ -1,0 +1,50 @@
+<html>
+<style type='text/css'>
+#wrap {
+margin:0px;
+padding:1px;
+height:100px;
+background-color:#6e91c4;
+}
+</style>
+<head, id='wrap'>
+
+<script type='text/javascript'>
+
+function Gruppa(n,spec,kolich) 
+	{
+	//Свойства(номер, специальность, количество)
+	this.n=n;
+	this.spec=spec;
+	this.kolich=kolich;
+	//Метод (добавить в группу k студентов)
+	this.add_stud=function add_stud(k) 
+		{
+              this.kolich+=k;
+				document.write('В группу ' + this.n + ' добавили '+ k + ' студентов.<br\>'); 
+		}
+	this.sub_stud = function sub_stud(k)
+		{
+			this.kolich-=k;
+			document.write('Из группы ' + this.n + ' исключили '+ k + ' студентов.<br\>');
+		}
+	
+	}
+gr2=new Gruppa(2, 'Программисты', 14);
+gr2.add_stud(2);
+gr2.sub_stud(5);
+document.write(" Количество студентов в группе "+gr2.n+" - "+gr2.kolich+".<br\>");
+
+gr3=new Gruppa(3, 'Математики', 30);
+gr3.add_stud(1);
+gr3.sub_stud(9);
+document.write(" Количество студентов в группе "+gr3.n+" - "+gr3.kolich+".<br\>");
+gr4=new Gruppa(4, 'Энергетики', 15);
+gr4.add_stud(7);
+gr4.sub_stud(1);
+document.write(" Количество студентов в группе "+gr4.n+" - "+gr4.kolich+".<br\>");
+</script>
+
+</head>
+</html>
+
