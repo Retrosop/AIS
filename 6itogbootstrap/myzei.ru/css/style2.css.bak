@@ -1,0 +1,49 @@
+body{
+	background: #ececec;
+}
+img {
+	height: auto;
+	max-width: 100%;
+}
+.content1{
+	margin-top: 50px;
+}
+.produc {
+	background: #fff none repeat scroll 0 0;
+	border: 2px solid #c0c0c0;
+	height: auto;
+	overflow: hidden;
+	padding: 25px 15px;
+	position: relative;
+	text-align: justify;
+	transition: all 0.5s ease 0s;
+	margin-bottom: 20px;
+}
+.produc:hover {
+	box-shadow: 0 0 16px rgba(0, 0, 0, 0.5);
+}
+.produc-img {
+	height: 20px;
+    align:left;
+	margin-bottom: 5px;
+        
+}
+.produc-title a {
+	color: #652790;
+	font-weight: 500;
+        font-weight:bold;
+	text-transform: uppercase;
+}
+.produc-desc {
+    max-height: 60px;
+    overflow: hidden;
+}
+.produc-price {
+	bottom: 15px;
+	left: 0;
+	position: absolute;
+	width: 80%;
+	color: #d51e08;
+	font-size: 25px;
+	font-weight: 500;
+}

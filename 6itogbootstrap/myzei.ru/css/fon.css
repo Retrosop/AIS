@@ -1,0 +1,12 @@
+html {
+
+  background-image:url('ban.jpg');
+
+       -webkit-background-size: cover;
+       -moz-background-size: cover;
+       -o-background-size: cover;
+       background-size: cover;
+}
+b {
+	color:red;
+}

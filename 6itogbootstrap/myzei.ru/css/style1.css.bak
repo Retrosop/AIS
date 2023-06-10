@@ -1,0 +1,271 @@
+body {
+	margin: 0;
+	padding: 0;
+	overflow: auto;
+	background-repeat: no-repeat;
+	background-size: 100%;
+	background-attachment: fixed;
+	background-size: cover;
+	backdrop-filter: blur(3px);
+	background-image: url(https://mto-service.ru/templates/yootheme/cache/telecom-f4d95431.png);
+}
+
+::-webkit-scrollbar {
+	background-color: rgb(128, 128, 128);
+	width: 13px;
+}
+
+::-webkit-scrollbar-button {
+	background-color: rgb(0, 0, 0);
+}
+
+::-webkit-scrollbar-thumb {
+	background-color: rgb(10, 145, 255);
+}
+
+nav {
+	background-color: rgba(255, 255, 255, 0.055);
+}
+
+#nav-pc {
+	z-index: 1001;
+	position: sticky;
+	top: 0;
+}
+
+#dpopmenu-1:after {
+	content: "\f107";
+	font-family: "Font Awesome 5 Free";
+	font-weight: 900;
+	color: rgb(128, 128, 128);
+	margin-left: 5px;
+}
+
+#dpopmenu-1:hover::after {
+	color: red;
+	content: "\f106";
+	font-family: "Font Awesome 5 Free";
+	font-weight: 900;
+}
+
+#dpopmenu-2:after {
+	content: "\f107";
+	font-family: "Font Awesome 5 Free";
+	font-weight: 900;
+	color: rgb(128, 128, 128);
+	margin-left: 5px;
+}
+
+#dpopmenu-2:hover::after {
+	color: red;
+	content: "\f106";
+	font-family: "Font Awesome 5 Free";
+	font-weight: 900;
+}
+
+.ul-margin {
+	position: relative;
+	margin-left: 100px;
+	display: inline-block;
+}
+
+nav ul {
+	list-style: none;
+	z-index: 1001;
+	margin: 0;
+	padding: 22px;
+}
+
+nav>ul>li {
+	display: inline-block;
+}
+
+nav ul::after {
+	content: "";
+	display: block;
+	clear: both;
+}
+
+nav ul li a {
+	display: inline-block;
+	text-decoration: none;
+	color: rgb(128, 128, 128);
+	font-family: Verdana, Geneva, Tahoma, sans-serif;
+	margin-right: 40px;
+	font-size: 25px;
+	line-height: 40px;
+}
+
+nav ul li a:hover {
+	color: red;
+	transition: .15s;
+}
+
+nav ul ul {
+	display: none;
+	position: absolute;
+	margin-left: 20px;
+}
+
+nav ul li:hover ul {
+	display: block;
+	background-color: rgba(78, 78, 78, 0.781);
+	transition: .2s;
+	border-radius: 5px;
+}
+
+.portfolio-wrap {
+	max-width: 1120px;
+	margin: 0 auto;
+	display: flex;
+	justify-content: center;
+	flex-wrap: wrap;
+}
+
+.portfolio-item {
+	padding: 10px;
+	margin-top: 10em;
+}
+
+.portfolio-item a {
+	display: block;
+	text-decoration: none;
+	color: white;
+}
+
+.portfolio-item-wrap {
+	position: relative;
+	overflow: hidden;
+	text-align: center;
+	box-shadow: 0 0 5px rgba(0, 0, 0, .2);
+	background: black;
+	color: white;
+}
+
+.portfolio-item img {
+	display: block;
+	width: 100%;
+	opacity: .75;
+	transition: .5s ease-in-out;
+}
+
+.portfolio-item-inner {
+	position: absolute;
+	top: 45%;
+	left: 7%;
+	right: 7%;
+	bottom: 45%;
+	border: 1px solid white;
+	border-width: 0 1px 1px;
+	transition: .4s ease-in-out;
+}
+
+.portfolio-heading {
+	overflow: hidden;
+	transform: translateY(-50%);
+}
+
+.portfolio-heading h3 {
+	font-family: 'Pattaya', sans-serif;
+	font-weight: normal;
+	display: table;
+	margin: 0 auto;
+	padding: 0 10px;
+	position: relative;
+}
+
+.portfolio-heading h3:before,
+.portfolio-heading h3:after {
+	content: "";
+	position: absolute;
+	top: 50%;
+	width: 50px;
+	height: 1px;
+	background: white;
+}
+
+.portfolio-heading h3:before {
+	left: -50px;
+}
+
+.portfolio-heading h3:after {
+	right: -50px;
+}
+
+.portfolio-item-inner ul {
+	position: absolute;
+	top: 50%;
+	width: 100%;
+	transform: translateY(-50%);
+	padding: 0 0px;
+	opacity: 0;
+	list-style: none;
+	font-family: 'Raleway', sans-serif;
+	transition: .4s ease-in-out;
+}
+
+.portfolio-item-inner li {
+	position: relative;
+	font-size: 200%;
+	padding: 10px;
+}
+
+.portfolio-item-inner li:after {
+	content: "";
+	position: absolute;
+	left: 50%;
+	margin-left: -2px;
+	bottom: -4px;
+	width: 4px;
+	height: 4px;
+	border-radius: 50%;
+	background: white;
+	box-shadow: 10px 0 0 white, -10px 0 0 white;
+}
+
+.portfolio-item-inner li:last-child:after {
+	content: none;
+}
+
+.portfolio-item:hover img {
+	opacity: 0.45;
+	transform: scale(1.1);
+}
+
+.portfolio-item:hover .portfolio-item-inner {
+	top: 7%;
+	bottom: 7%;
+}
+
+.portfolio-item:hover ul {
+	opacity: 1;
+	transition-delay: .5s;
+}
+.container{
+	margin-top: 40em;
+}
+.table1 {
+
+	color: #fff;
+	font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+	border: rgb(196, 196, 196) solid 1px;
+	background-color: rgba(143, 143, 143, 0.199);
+	max-width: 1120px;
+	margin: 10em auto;
+	display: flex;
+	justify-content: center;
+	flex-wrap: wrap;
+	backdrop-filter: blur(2px);
+}
+
+.table1 caption {
+	width: 100%;
+	font-size: 120%;
+}
+img{
+	max-width: 1120px;
+	margin: 0 auto;
+	display: flex;
+	justify-content: center;
+	flex-wrap: wrap;
+}
