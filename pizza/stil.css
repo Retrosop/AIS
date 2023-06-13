@@ -1,0 +1,327 @@
+body {
+    margin: 0;
+    font-family: 'Open Sans', sans-serif;
+}
+
+.container {
+    margin: 0px 166px;
+}
+
+.containerpizza {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 20px;
+  padding: 0 50px; /* отступы слева и справа */
+  margin: 0 auto; /* выравнивание по центру */
+  max-width: 1200px; /* максимальная ширина контейнера */
+  
+}
+
+
+
+
+.header-line {
+    padding-top: 50px;
+    display: flex;
+    
+    justify-content: space-around;
+}
+
+.nav {
+  display: flex;
+  align-items: center; /* выравнивание содержимого по центру блока */
+  text-align: left;
+  flex: 1;
+  margin-left: 5%;
+}
+.nav-item {
+    color: black;
+    text-decoration: none;
+    font-weight: 700;
+    font-size: 14px;
+    margin-right: 25px;
+    transition: color 0.3s linear;
+}
+
+.nav-item:hover {
+    color: #FF7400;
+}
+
+.section-title {
+  text-align: left;
+  margin-bottom: 30px; /* добавляем отступ между контейнером раздела и контейнером пицц */
+  
+  margin: 0 auto; /* выравнивание по центру */
+  max-width: 1200px; /* максимальная ширина контейнера */
+}
+
+.section-title h2 {
+  font-size: 24px;
+  font-weight: 700;
+  color: #333;
+}
+
+.cart {
+  position: relative;
+  border-right: 1px solid #FFFFFF;
+  padding-right: 60px; /* увеличьте этот параметр, чтобы увеличить размер корзины */
+  height: 80px; /* увеличьте этот параметр, чтобы увеличить высоту блока */
+  display: flex;
+  align-items: center; /* выравнивание содержимого по центру блока */
+  margin-left: 900px;
+}
+
+.cart-img {
+    position: absolute;
+    top: 18px;
+    right: 7px;
+}
+
+.num {
+    color: #fff;
+    text-decoration: none;
+    font-weight: 700;
+
+    transition: color 0.3s linear;
+}
+
+.num:hover {
+    color: #d81d1d;
+}
+
+.phone-text {
+    font-size: 14px;
+    font-weight: 400;
+    color: #fff;
+}
+
+.phone-holder {
+    display: flex;
+    align-items: center;
+}
+
+.button {
+    width: 120px;
+    height: 40px;
+    line-height: 40px;
+    text-align: center;
+    font-size: 14px;
+    background-color: #FF7400;
+    color: #fff;
+    border-radius: 5px;
+    text-decoration: none;
+    transition: background-color 0.3s;
+    display: block;
+    margin-top: auto;
+	margin-left: auto;
+  margin-right: auto;
+}
+
+.button:hover {
+    background-color: #894b17;
+}
+
+.pizza-container {
+  
+  display: flex;
+  align-items: center;
+  flex-flow: column;
+  justify-content: space-between;
+  width: calc(25% - 20px);
+  margin-bottom: 20px;
+  text-align: center;
+  position: relative;
+}
+}
+   
+}
+
+.pizza-image {
+  width: 280px;
+  max-height: 274px;
+  
+  transition: transform 0.2s linear;
+  border-radius: 10px;
+}
+
+.pizza-image:hover {
+  transform: translateY(5px); /* применяем трансформацию при наведении на картинку */
+}
+
+.pizza-title {
+   margin-top: 20px;
+   font-size: 18px;
+   font-weight: 700;
+   
+}
+
+.pizza-description {
+  margin-top: 10px;
+   font-size: 14px;
+   color: #555;
+   line-height: 1.5em;
+   height: 80px;
+   overflow: hidden;
+   text-overflow: ellipsis;
+   padding: 10px;
+   background-color: rgba(255, 255, 255, 0.8);
+   position: relative; /* Зададим относительное позиционирование */
+   z-index: 1; /* Установим z-index, чтобы описание располагалось поверх всех остальных элементов */
+}
+
+.pizza-price {
+ font-weight: bold;
+  font-size: 20px;
+  color: #FF7400;
+  margin-top: auto;
+  text-align: left;
+  margin-bottom:10px;
+}
+
+
+
+.drink-container {
+  display: inline-block;
+  width: 20%;
+  margin: 20px;
+  text-align: center;
+}
+
+.drink-image {
+  width: 100%;
+  height: 200px;
+  object-fit: contain;
+  transition: transform 0.2s linear;
+}
+
+.drink-image:hover{
+	transform: translateY(5px); /* применяем трансформацию при наведении на картинку */
+}
+
+.containerdrink {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 20px;
+  padding: 0 50px; /* отступы слева и справа */
+  margin: 0 auto; /* выравнивание по центру */
+  max-width: 1200px; /* максимальная ширина контейнера */
+  margin-bottom: 50px; /* добавляем отступ снизу */
+
+}
+
+
+.drink-container {
+  display: inline-block;
+  width: 20%;
+  margin: 20px;
+  text-align: center;
+}
+
+.drink-image {
+  width: 100%;
+  height: 200px;
+  object-fit: contain;
+  transition: transform 0.2s linear;
+}
+
+.drink-image:hover{
+  transform: translateY(5px);
+}
+
+.containerdrink {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 20px;
+  padding: 0 50px;
+  margin: 0 auto;
+  max-width: 1200px;
+  margin-bottom: 50px;
+}
+
+.drink-title {
+  margin-top: 20px;
+  font-size: 18px;
+  font-weight: 700;
+  height:50px;
+}
+
+.drink-price {
+  font-weight: bold;
+  font-size: 20px;
+  color: #FF7400;
+  margin-top: auto;
+  text-align: center;
+  margin-bottom: 10px;
+}
+
+.cart {
+  position: relative;
+  border-right: 1px solid #FFFFFF;
+  padding-right: 10px;
+  height: 60px;
+}
+
+.cart-img {
+  position: absolute;
+  top: 18px;
+  right: 7px;
+}
+
+.num {
+  color: #fff;
+  text-decoration: none;
+  font-weight: 700;
+  transition: color 0.3s linear;
+  background-color: #FF7400;
+  padding: 5px 10px;
+  border-radius: 50px;
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  font-size: 18px;
+  min-width: 20px;
+  text-align: center;
+}
+
+.num:hover {
+  color: #d81d1d;
+}
+
+.hidden {
+  display: none !important;
+}
+
+
+
+
+.about {
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            margin-top: 50px;
+        }
+
+        .description {
+            width: 50%;
+            text-align: justify;
+            font-size: 18px;
+            padding: 0 50px;
+        }
+
+        .description img {
+            float: right;
+            margin: 0 0 50px 50px;
+            border-radius: 50%;
+        }
+        
+        .picture {
+            width: 40%;
+            text-align: center;
+        }
+
+        .picture img {
+            max-width: 100%;
+            border-radius: 50%;
