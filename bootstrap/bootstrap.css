@@ -1,0 +1,91 @@
+.thumbnail {
+  border: none;
+  box-shadow: none;
+  transition: transform 0.2s linear;
+}
+
+.thumbnail:hover{
+	transform: translateY(5px);
+}
+.btn-orange {
+  background-color: #FFA500;
+  border-color: #FFA500;
+  color: #ffffff;
+}
+
+.btn-primary {
+  background-color: none;
+  border-color: none;
+  color: #007bff;
+}
+
+.caption {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.item {
+  margin-top: 20px;
+}
+
+.container3 h2 {
+	margin-left:190px;
+}
+.navbar {
+    background-color: transparent;
+}
+.navbar-nav{
+	text-align: left; 
+  flex: 1; 
+  margin-left:5%;
+	color:black;
+
+}
+
+
+
+.navbar-default {
+  background: none;
+  filter: none;
+  -webkit-box-shadow: none;
+  -moz-box-shadow: none;
+   border: none;
+  box-shadow: none;
+  color:black;
+}
+
+.navbar-inverse {
+  ...
+  background-color: #222;
+  ...
+}
+
+.navbar-default .navbar-nav > li > a.active > a {
+	color:#000000;
+	background-color: transparent !important;
+  border-color: transparent;
+}
+.navbar-default .navbar-nav > li > a:not(.active):hover,
+.navbar-default .navbar-nav > li > a:not(.active):focus {
+    color: #FFA500;
+	background-color: transparent !important;
+}
+
+.bg-black{
+  background-color: rgb(255, 255, 255); 
+}
+.main-bg-white{
+  background-color: #FFFFFF;
+}
+nav {
+	color:black;
+	font-size:16px;
+
+}
