@@ -1,0 +1,173 @@
+body 
+{
+	cursor: url('img/target.gif');
+	background: #ffffff url("img/trentanove.gif") repeat top right;
+}
+
+#stat 
+{
+	background: #ffffff url("img/trentaquattro.gif") repeat top right;
+	margin: 0 auto;
+	border: 5px solid #999999;
+	width: 600px;
+	padding: 20px 50px;
+	margin-bottom: 20px;
+	margin-top: 20px;
+	-webkit-border-radius: .5em;
+	-moz-border-radius: .5em;
+	border-radius: .5em;
+	text-align: center;
+}
+
+#stat span, #stat a 
+{
+	text-decoration: none;
+	font-size: 28px;
+	background: #d3d3d3;
+	padding: 2px 10px;
+	color: #333333;
+	-webkit-border-radius: .2em;
+	-moz-border-radius: .2em;
+	border-radius: .2em;
+	opacity: 0.8;
+	filter:alpha(opacity=80);
+}
+
+#stat a:hover 
+{
+	background: #999999;
+}
+
+#note
+{
+	margin: 0 auto;
+	color: #ffffff;
+	margin-bottom: 20px;
+	width: 600px;
+	text-align: center;
+	font-size: 11px;
+	font-family: Arial, "Free Sans";
+}
+
+#container 
+{
+	background: #ffffff url("img/trentaquattro.gif") repeat top right;
+	margin: 0 auto;
+	border: 5px solid #999999;
+	width: 600px;
+	height: 350px;
+	padding: 20px 50px;
+	cursor: url("img/target.gif"), pointer;
+	-webkit-border-radius: .5em;
+	-moz-border-radius: .5em;
+	border-radius: .5em;
+}
+
+ #message 
+ {
+	background: #999999;
+	margin: 0 auto;
+	border: 5px solid #999999;
+	width: 600px;
+	height: 350px;
+	padding: 20px 50px;
+	-webkit-border-radius: .5em;
+	-moz-border-radius: .5em;
+	border-radius: .5em;
+	position: absolute;
+	opacity: 0.8;
+	filter:alpha(opacity=80);
+	text-align: center;
+	font-size: 28px;
+	color: #000000;
+	display: none;
+}
+
+.character 
+{
+	border: 2px solid #f3f3f3;
+	width: 95px;
+	height: 95px;
+	position: absolute;
+	display: none;
+	-webkit-border-radius: .5em;
+	-moz-border-radius: .5em;
+	border-radius: .5em;
+	cursor: url('img/target.gif'), pointer;
+}
+.character:hover 
+{
+	opacity: 0.6;
+	filter:alpha(opacity=60);
+}
+.enemy1 
+{
+	background: url("img/enemy1.jpg");
+}
+.enemy2 
+{
+	background: url("img/enemy2.jpg");
+}
+.enemy3 
+{
+	background: url("img/enemy3.jpg");
+}
+
+.ally 
+{
+	background: url("img/ally.jpg");
+}
+
+table.iksweb
+{
+	width: 50%;
+	border-collapse:collapse;
+	border-spacing:0;
+	height: auto;
+}
+
+table.iksweb,table.iksweb td, table.iksweb th 
+{
+	border: 1px solid #595959;
+}
+
+table.iksweb td,table.iksweb th {
+	padding: 3px;
+	width: 30px;
+	height: 35px;
+	color: white;
+	text-align:center;
+}
+
+table.iksweb th 
+{
+	background: #347c99;
+	color: #fff; 
+	font-weight: normal;
+}
+
+text 
+{
+	color:white;
+}
+
+.nform 
+{
+	display:inline-block;
+}
+
+.parent
+{
+	border: 1px solid black;
+	height: 140px;
+}
+
+.child
+{
+	height: 130px;
+	display: inline-block;
+	background: #ffffff url("img/trentaquattro.gif") repeat top right;
+	width: 17%;
+	border: 5px solid #999999;
+	border-radius: 0.5em;
+}
