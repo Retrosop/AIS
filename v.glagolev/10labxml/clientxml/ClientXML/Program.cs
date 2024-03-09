@@ -10,16 +10,16 @@ namespace ClientXML
 			List<Person> list = new List<Person>();
 			list.Add(new Person("Ivan", 34, "Google"));
 
-			XmlDocument xDoc = new XmlDocument();
-			xDoc.Load("Person.xml");
-			XmlElement? xRoot = xDoc.DocumentElement;
-			if (xRoot != null )
+			XmlDocument xmlDoc = new XmlDocument();
+			xmlDoc.Load("Person.xml");
+			XmlNodeList personNodes = xmlDoc.SelectNodes("//person");
+			foreach (XmlNode personNode in personNodes)
 			{
-				foreach (XmlElement xnode in xRoot)
-				{
-					XmlNode? attr = xnode.Attributes.GetNamedItem("name");
-                    Console.WriteLine(attr?.Value);
-                }
+				string name = personNode.Attributes["name"].Value;
+				string company = personNode.SelectSingleNode("company").InnerText;
+				int age = int.Parse(personNode.SelectSingleNode("age").InnerText);
+
+				Console.WriteLine($"Name: {name}, Company: {company}, Age: {age}");
 			}
 
 
