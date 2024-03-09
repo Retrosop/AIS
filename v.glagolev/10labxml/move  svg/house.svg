@@ -1,0 +1,1 @@
+<svg width="500" height="300" xmlns="http://www.w3.org/2000/svg"> <line x1="50" y1="150" x2="450" y2="150" stroke="black" stroke-width="3" /> <rect width="50" height="30" x="0" y="135" fill="blue"> <animate attributeName="x" from="0" to="450" dur="10s" fill="freeze" /> </rect> </svg>
