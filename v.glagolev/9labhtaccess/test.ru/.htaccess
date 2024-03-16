@@ -1,0 +1,18 @@
+# Disable directory listing
+Options -Indexes
+
+# Set index.php as the default start page
+DirectoryIndex index5.html
+
+# Redirect type/page/ID.html to page.php?pageid=ID
+RewriteEngine On
+RewriteRule ^type/page/([0-9]+)\.html$ page.php?pageid=$1 [L]
+
+# Error pages
+ErrorDocument 404 /e404.html
+ErrorDocument 403 /e403.html
+
+
+#http://localhost/type/page/7.html
+
+#http://localhost/page.php?pageid=7
